@@ -59,8 +59,6 @@
 	<packs>
 		<pack name="Required" required="yes" installGroups="Required Files">
 			<description>Required files to run the application.</description>
-			<file src="../${project.custom.jarfile}"
-				targetdir="$INSTALL_PATH/lib/" />
 			<file src="lib/" targetdir="$INSTALL_PATH" />
 			<file src="etc/" targetdir="$INSTALL_PATH" />
 		</pack>
@@ -68,6 +66,7 @@
 			installGroups="Linux noarch">
 			<description>Linux run files.</description>
 			<file src="bin/linux/" targetdir="$INSTALL_PATH/bin/" />
+            <file src="etc/en_US/" targetdir="$INSTALL_PATH/etc/" />
 			<executable targetfile="$INSTALL_PATH/bin/linux/run.sh"
 				stage="never" keep="true" />
 			<executable targetfile="$INSTALL_PATH/bin/linux/debug-run.sh"
