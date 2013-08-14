@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright 2013 Erwin Müller <erwin.mueller@deventm.org>
+
+    This file is part of sscontrol-cli-install.
+
+    sscontrol-cli-install is free software: you can redistribute it and/or modify it
+    under the terms of the GNU Affero General Public License as published by the
+    Free Software Foundation, either version 3 of the License, or (at your
+    option) any later version.
+
+    sscontrol-cli-install is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+    FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
+    for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with sscontrol-cli-install. If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<installation version="1.0">
+
+	<info>
+		<appname>${project.custom.name}</appname>
+		<appversion>${project.custom.version}</appversion>
+		<appsubpath>${project.custom.name}-${project.custom.version}</appsubpath>
+		<url>${project.custom.organization.url}</url>
+		<authors>
+			<author name="${project.custom.author.name}" email="${project.custom.author.email}" />
+		</authors>
+		<javaversion>${project.custom.source.source}</javaversion>
+	</info>
+
+	<guiprefs resizable="${project.custom.gui.resizeable}" width="${project.custom.gui.width}"
+		height="${project.custom.gui.height}" />
+
+	<locale>
+		<langpack iso3="eng" />
+	</locale>
+
+	<resources>
+		<res id="InfoPanel.info" src="${project.custom.readme}" />
+		<res id="shortcutSpec.xml" src="win_shortcutSpec.xml" />
+		<res id="Unix_shortcutSpec.xml" src="unix_shortcutSpec.xml" />
+	</resources>
+
+	<panels>
+		<panel classname="HelloPanel" />
+		<panel classname="InfoPanel" />
+		<panel classname="TargetPanel" />
+		<panel classname="PacksPanel" />
+		<panel classname="SummaryPanel" />
+		<panel classname="InstallPanel" />
+		<panel classname="ShortcutPanel" />
+		<panel classname="SimpleFinishPanel" />
+	</panels>
+
+	<packs>
+		<pack name="Required" required="yes" installGroups="Required Files">
+			<description>Required files to run the application.</description>
+			<file src="../${project.custom.jarfile}"
+				targetdir="$INSTALL_PATH/lib/" />
+			<file src="lib/" targetdir="$INSTALL_PATH" />
+			<file src="etc/" targetdir="$INSTALL_PATH" />
+		</pack>
+		<pack name="Linux run files" required="no" preselected="yes" os="unix"
+			installGroups="Linux noarch">
+			<description>Linux run files.</description>
+			<file src="bin/linux/" targetdir="$INSTALL_PATH/bin/" />
+			<executable targetfile="$INSTALL_PATH/bin/linux/run.sh"
+				stage="never" keep="true" />
+			<executable targetfile="$INSTALL_PATH/bin/linux/debug-run.sh"
+				stage="never" keep="true" />
+		</pack>
+		<pack name="Windows run files" required="no" preselected="yes"
+			os="windows" installGroups="Windows">
+			<description>Windows run files for x86 architecture.</description>
+			<file src="bin/windows/" targetdir="$INSTALL_PATH/bin/" />
+		</pack>
+		<pack name="Doc-English" required="no" preselected="yes"
+			installGroups="Documentation">
+			<description>English Documentation.</description>
+			<file src="doc/en/" targetdir="$INSTALL_PATH/doc/" />
+		</pack>
+		<pack name="Doc-Deutsch" required="no" preselected="yes"
+			installGroups="Documentation">
+			<description>Deutsche Dokumentation.</description>
+			<file src="doc/de/" targetdir="$INSTALL_PATH/doc/" />
+		</pack>
+	</packs>
+
+	<!-- Required for creating shortcuts on Windows -->
+	<native type="izpack" name="ShellLink.dll" />
+	<native type="izpack" name="ShellLink_x64.dll" />
+
+</installation>

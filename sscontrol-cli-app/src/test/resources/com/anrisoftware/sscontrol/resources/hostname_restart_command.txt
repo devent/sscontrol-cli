@@ -1,0 +1,3 @@
+theCommand="$0"
+echo "$@" >> $theCommand.out
+exit 1
