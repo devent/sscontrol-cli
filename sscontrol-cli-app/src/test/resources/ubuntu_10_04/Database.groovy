@@ -22,5 +22,5 @@ database {
 	bind_address "127.0.0.1"
 	admin_password "mysqladminpassword"
 	database "maildb"
-	user "mail", password: "mailpassword", { use_database "drupal6db" }
+	user "mail", password: "mailpassword", { use_database "maildb" }
 }
