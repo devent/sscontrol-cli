@@ -20,6 +20,13 @@ package ubuntu_10_04
 dns {
 	serial 1
 	bind_address "127.0.0.1"
+
+	// recursive servers
+	alias "localhost" address "127.0.0.1"
+	roots { servers "icann" }
+	recursive { servers "localhost" }
+
+	// first zone
 	zone "ubuntutest.com", "ns1.%", "hostmaster@%", "127.0.0.1", {
 		mx_record "mx1.%", "127.0.0.1"
 		cname_record "www.%", "%"
