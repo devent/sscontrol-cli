@@ -18,8 +18,8 @@
  */
 package com.anrisoftware.sscontrol.start;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import static org.apache.commons.lang3.builder.ToStringBuilder.setDefaultStyle;
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import com.anrisoftware.sscontrol.app.App;
 import com.anrisoftware.sscontrol.app.AppException;
@@ -44,7 +44,8 @@ public class Starter {
 	 *            the command line arguments.
 	 */
 	public static void main(String[] args) {
-		ToStringBuilder.setDefaultStyle(ToStringStyle.SHORT_PREFIX_STYLE);
+		log = new StarterLogger();
+		setDefaultStyle(SHORT_PREFIX_STYLE);
 		Injector injector = Guice.createInjector(new AppModule());
 		try {
 			injector.getInstance(App.class).start(args);
