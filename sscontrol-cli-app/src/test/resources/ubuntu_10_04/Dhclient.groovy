@@ -16,12 +16,9 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with sscontrol-cli-app. If not, see <http://www.gnu.org/licenses/>.
  */
+package ubuntu_10_04
 
-profile "ubuntu_10_04", {
-	system { }
-	hostname { }
-	hosts { }
-	dns { service "maradns" }
-	dhclient { }
-	firewall { service "ufw" }
+dhclient {
+	requests "!domain-name-servers"
+	prepend "domain-name-servers", "127.0.0.1"
 }

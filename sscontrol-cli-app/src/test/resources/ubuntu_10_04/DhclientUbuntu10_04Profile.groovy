@@ -23,5 +23,4 @@ profile "ubuntu_10_04", {
 	hosts { }
 	dns { service "maradns" }
 	dhclient { }
-	firewall { service "ufw" }
 }
