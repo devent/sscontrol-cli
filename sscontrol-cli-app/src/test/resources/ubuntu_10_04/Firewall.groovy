@@ -20,4 +20,6 @@ package ubuntu_10_04
 firewall {
 	deny
 	allow port: "ssh"
+	allow port: "smtp"
+	allow port: "smtps"
 }
