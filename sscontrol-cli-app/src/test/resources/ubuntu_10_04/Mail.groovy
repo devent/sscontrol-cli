@@ -22,12 +22,12 @@ mail {
 	bind_addresses all
 
 	relay "smtp.relayhost.com"
-	name "mail.example.com"
-	origin "example.com"
-	database "maildb" user "root" password "password"
+	name "mail.ubuntutest.com"
+	origin "ubuntutest.com"
+	database "maildb" user "mail" password "mailpassword"
 
 	masquerade {
-		domains "mail.example.com"
+		domains "mail.ubuntutest.com"
 		users "root"
 	}
 
@@ -43,5 +43,5 @@ mail {
 		user "root", password: "rootpasswd"
 	}
 
-	domain "ubuntutest.com", { user "devent", password: "deventpasswd" }
+	domain "ubuntutest.com", { user "devent", password: "devent12" }
 }
