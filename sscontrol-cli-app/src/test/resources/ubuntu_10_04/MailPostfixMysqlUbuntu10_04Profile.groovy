@@ -28,5 +28,5 @@ profile "ubuntu_10_04", {
 		storage "mysql"
 	}
 	firewall { service "ufw" }
-	dhclient { }
+	//dhclient { }
 }

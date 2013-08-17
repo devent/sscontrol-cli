@@ -21,7 +21,6 @@ package ubuntu_10_04
 mail {
 	bind_addresses all
 
-	relay "smtp.relayhost.com"
 	name "mail.ubuntutest.com"
 	origin "ubuntutest.com"
 	database "maildb" user "mail" password "mailpassword"
@@ -43,5 +42,8 @@ mail {
 		user "root", password: "rootpasswd"
 	}
 
-	domain "ubuntutest.com", { user "devent", password: "devent12" }
+	domain "ubuntutest.com", {
+		user "devent", password: "devent12"
+		user "userfoo", password: "foo12"
+	}
 }
