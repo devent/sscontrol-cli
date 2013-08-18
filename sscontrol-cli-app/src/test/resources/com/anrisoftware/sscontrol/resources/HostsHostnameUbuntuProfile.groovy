@@ -17,11 +17,19 @@
  * along with sscontrol-cli-app. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.anrisoftware.sscontrol.resources
+
+def aptitude = "/usr/bin/aptitude"
+def restart = "/sbin/restart"
+
 profile "ubuntu_10_04", {
-	system {
-		install_command "${prefix}/usr/bin/aptitude update && ${prefix}/usr/bin/aptitude install"
-		restart_command "${prefix}/sbin/restart"
+	hostname {
+		install_command "$prefix$aptitude update && $prefix$aptitude install"
+		restart_command "$prefix$restart"
+		configuration_directory "$prefix/etc"
 	}
-	hostname { configuration_directory "${prefix}/etc" }
-	hosts { configuration_directory "${prefix}/etc" }
+	hosts {
+		install_command "$prefix$aptitude update && $prefix$aptitude install"
+		restart_command "$prefix$restart"
+		configuration_directory "$prefix/etc"
+	}
 }
