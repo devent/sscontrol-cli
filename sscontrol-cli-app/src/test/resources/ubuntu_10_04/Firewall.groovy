@@ -22,4 +22,6 @@ firewall {
 	allow port: "ssh"
 	allow port: "smtp"
 	allow port: "smtps"
+	allow port: "http"
+	allow port: "https"
 }

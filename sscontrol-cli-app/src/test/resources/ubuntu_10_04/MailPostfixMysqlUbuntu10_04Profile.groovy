@@ -18,7 +18,6 @@
  */
 
 profile "ubuntu_10_04", {
-	system { }
 	hostname { }
 	hosts { }
 	dns { service "maradns" }
@@ -28,5 +27,4 @@ profile "ubuntu_10_04", {
 		storage "mysql"
 	}
 	firewall { service "ufw" }
-	//dhclient { }
 }

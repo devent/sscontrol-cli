@@ -21,5 +21,11 @@ profile "ubuntu_10_04", {
 	hostname { }
 	hosts { }
 	dns { service "maradns" }
+	database { service "mysql" }
+	mail {
+		service "postfix"
+		storage "mysql"
+	}
+	firewall { service "ufw" }
 	dhclient { }
 }

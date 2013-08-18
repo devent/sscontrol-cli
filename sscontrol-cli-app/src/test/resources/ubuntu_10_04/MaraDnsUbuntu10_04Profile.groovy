@@ -18,7 +18,6 @@
  */
 
 profile "ubuntu_10_04", {
-	system { }
 	hostname { }
 	hosts { }
 	dns { service "maradns" }
