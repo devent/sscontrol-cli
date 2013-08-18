@@ -71,6 +71,8 @@
 				stage="never" keep="true" />
 			<executable targetfile="$INSTALL_PATH/bin/linux/debug-run.sh"
 				stage="never" keep="true" />
+            <executable targetfile="$INSTALL_PATH/bin/linux/test-run.sh"
+                stage="never" keep="true" />
 		</pack>
 		<pack name="Windows run files" required="no" preselected="yes"
 			os="windows" installGroups="Windows">
