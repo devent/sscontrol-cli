@@ -17,18 +17,28 @@
  * along with sscontrol-cli-app. If not, see <http://www.gnu.org/licenses/>.
  */
 package ubuntu_10_04
-dns {
-	serial 1
-	bind_address "127.0.0.1"
 
-	// recursive servers
-	alias "localhost" address "127.0.0.1"
-	roots { servers "icann" }
-	recursive { servers "localhost" }
-
-	// first zone
-	zone "ubuntutest.com", "ns1.%", "hostmaster@%", "192.168.0.100", {
-		mx_record "mx1.%", "192.168.0.100"
-		cname_record "www.%", "%"
+httpd {
+	domain "ubuntutest.com", address: "192.168.0.100", {
+		redirect to_www
+		redirect http_to_https
+	}
+	ssl_domain "ubuntutest.com", address: "192.168.0.100", {
+		certification_file certCrt.resource
+		certification_key_file certKey.resource
+		redirect to_www
+		setup_auth provider: file, name: "private", {
+			location "private"
+			require valid_user
+			require group: "admin"
+			group "admin", {
+				user "adminfoo", password: "adminfoopassword"
+				user "adminbar", password: "adminbarpassword"
+				user "adminbaz", password: "adminbazpassword"
+			}
+			user "foo", password: "foopassword"
+			user "bar", password: "barpassword"
+			user "baz", password: "bazpassword"
+		}
 	}
 }

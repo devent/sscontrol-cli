@@ -16,19 +16,5 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with sscontrol-cli-app. If not, see <http://www.gnu.org/licenses/>.
  */
-package ubuntu_10_04
-dns {
-	serial 1
-	bind_address "127.0.0.1"
 
-	// recursive servers
-	alias "localhost" address "127.0.0.1"
-	roots { servers "icann" }
-	recursive { servers "localhost" }
-
-	// first zone
-	zone "ubuntutest.com", "ns1.%", "hostmaster@%", "192.168.0.100", {
-		mx_record "mx1.%", "192.168.0.100"
-		cname_record "www.%", "%"
-	}
-}
+profile "ubuntu_10_04", { httpd { service "apache" } }
