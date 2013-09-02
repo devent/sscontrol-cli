@@ -84,7 +84,7 @@
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
 				<artifactId>globalpom-utils</artifactId>
-				<version>1.7</version>
+				<version>1.8</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
@@ -104,7 +104,7 @@
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
 				<artifactId>globalpom-log</artifactId>
-				<version>1.13.1</version>
+				<version>1.14</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
