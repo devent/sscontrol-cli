@@ -31,6 +31,11 @@ httpd {
 	ssl_domain "admin.ubuntutest.com", address: "192.168.0.100", {
 		certification_file "/home/devent/certs/admin.ubuntutest.com.crt"
 		certification_key_file "/home/devent/certs/admin.ubuntutest.com.key.insecure"
+		setup "phpmyadmin", alias: "phpmyadmin", {
+			admin "root", password: "mysqladminpassword"
+			control "phpmyadmin", password: "phpmyadminpassword", database: "phpmyadmin"
+			server "127.0.0.1", port: 3306
+		}
 		setup_auth provider: file, name: "phpmyadmin", {
 			location "phpmyadmin"
 			require group: "phpmyadmin"
