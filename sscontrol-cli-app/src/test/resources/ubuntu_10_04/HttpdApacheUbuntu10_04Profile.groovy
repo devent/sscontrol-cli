@@ -17,4 +17,10 @@
  * along with sscontrol-cli-app. If not, see <http://www.gnu.org/licenses/>.
  */
 
-profile "ubuntu_10_04", { httpd { service "apache" } }
+profile "ubuntu_10_04", {
+	hostname { }
+	hosts { }
+	dns { service "maradns" }
+	database { service "mysql" }
+	httpd { service "apache" }
+}

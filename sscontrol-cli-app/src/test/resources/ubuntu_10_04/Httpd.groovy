@@ -24,21 +24,21 @@ httpd {
 		redirect http_to_https
 	}
 	ssl_domain "ubuntutest.com", address: "192.168.0.100", {
-		certification_file certCrt.resource
-		certification_key_file certKey.resource
+		certification_file "/home/devent/certs/www.ubuntutest.com.crt"
+		certification_key_file "/home/devent/certs/www.ubuntutest.com.key.insecure"
 		redirect to_www
-		setup_auth provider: file, name: "private", {
-			location "private"
-			require valid_user
-			require group: "admin"
-			group "admin", {
+	}
+	ssl_domain "admin.ubuntutest.com", address: "192.168.0.100", {
+		certification_file "/home/devent/certs/admin.ubuntutest.com.crt"
+		certification_key_file "/home/devent/certs/admin.ubuntutest.com.key.insecure"
+		setup_auth provider: file, name: "phpmyadmin", {
+			location "phpmyadmin"
+			require group: "phpmyadmin"
+			group "phpmyadmin", {
 				user "adminfoo", password: "adminfoopassword"
 				user "adminbar", password: "adminbarpassword"
 				user "adminbaz", password: "adminbazpassword"
 			}
-			user "foo", password: "foopassword"
-			user "bar", password: "barpassword"
-			user "baz", password: "bazpassword"
 		}
 	}
 }

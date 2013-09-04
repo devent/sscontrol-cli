@@ -30,5 +30,6 @@ dns {
 	zone "ubuntutest.com", "ns1.%", "hostmaster@%", "192.168.0.100", {
 		mx_record "mx1.%", "192.168.0.100"
 		cname_record "www.%", "%"
+		cname_record "admin.%", "%"
 	}
 }

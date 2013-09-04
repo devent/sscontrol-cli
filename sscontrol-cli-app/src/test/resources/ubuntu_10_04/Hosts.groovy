@@ -17,6 +17,4 @@
  * along with sscontrol-cli-app. If not, see <http://www.gnu.org/licenses/>.
  */
 
-hosts {
-	ip "192.168.0.100" host "ubuntu.ubuntutest.com" alias "ubuntu"
-}
+hosts { ip "192.168.0.100" host "ubuntu.ubuntutest.com" alias "ubuntu" }
