@@ -31,7 +31,6 @@ mail {
 	}
 
 	domain "localhost.localdomain", { catchall destination: "@localhost" }
-
 	domain "localhost", {
 		alias "postmaster", destination: "root"
 		alias "sysadmin", destination: "root"
@@ -42,6 +41,7 @@ mail {
 		user "root", password: "rootpasswd"
 	}
 
+	domain "admin.ubuntutest.com", { catchall destination: "@ubuntutest.com" }
 	domain "ubuntutest.com", {
 		user "devent", password: "devent12"
 		user "userfoo", password: "foo12"
