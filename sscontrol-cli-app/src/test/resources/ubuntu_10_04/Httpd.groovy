@@ -36,14 +36,9 @@ httpd {
 			control "phpmyadmin", password: "phpmyadminpassword", database: "phpmyadmin"
 			server "127.0.0.1", port: 3306
 		}
-		setup_auth provider: file, name: "phpmyadmin", {
-			location "phpmyadmin"
-			require group: "phpmyadmin"
-			group "phpmyadmin", {
-				user "adminfoo", password: "adminfoopassword"
-				user "adminbar", password: "adminbarpassword"
-				user "adminbaz", password: "adminbazpassword"
-			}
+		auth "PhpMyAdmin Access", location: "phpmyadmin", provider: file, {
+			require valid_user
+			user "admin", password: "adminpass"
 		}
 	}
 }
