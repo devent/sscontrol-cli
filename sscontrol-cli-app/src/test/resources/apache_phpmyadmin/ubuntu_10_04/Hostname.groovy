@@ -19,5 +19,5 @@
 package apache_phpmyadmin.ubuntu_10_04
 
 hostname { //.
-	set "ubuntu" //.
+	set "server1" //.
 }

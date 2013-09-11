@@ -17,10 +17,13 @@
  * along with sscontrol-cli-app. If not, see <http://www.gnu.org/licenses/>.
  */
 package apache_phpmyadmin.ubuntu_10_04
+
 database {
 	debugging true
 	bind_address "127.0.0.1"
 	admin_password "mysqladminpassword"
 	database "phpmyadmin"
-	user "phpmyadmin", password: "phpmyadminpassword", { use_database "phpmyadmin" }
+	user "phpmyadmin", password: "phpmyadminpassword", { //.
+		use_database "phpmyadmin" //.
+	}
 }

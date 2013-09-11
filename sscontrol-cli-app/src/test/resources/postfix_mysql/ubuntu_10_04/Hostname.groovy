@@ -19,5 +19,5 @@
 package postfix_mysql.ubuntu_10_04
 
 hostname { //.
-	set "ubuntu" //.
+	set "server1" //.
 }

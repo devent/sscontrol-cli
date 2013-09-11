@@ -19,6 +19,5 @@
 package apache_phpmyadmin.ubuntu_10_04
 
 hosts {
-	ip "192.168.0.100" host "ubuntutest.com" alias "ubuntu"
-	ip "192.168.0.100" host "admin.ubuntutest.com" alias "admin"
+	ip "192.168.0.100" host "ubuntutest.com" alias "server1" //.
 }
