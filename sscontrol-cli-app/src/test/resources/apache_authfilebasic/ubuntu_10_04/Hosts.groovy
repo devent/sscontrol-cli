@@ -18,7 +18,6 @@
  */
 package apache_authfilebasic.ubuntu_10_04
 
-host {
-	ip "127.0.0.1" host "server1" alias "server1"
-	ip "192.168.0.100" host "server1.ubuntutest.com" alias "server1"
+hosts {
+	ip "192.168.0.100" host "server1.ubuntutest.com" alias "server1" //*
 }

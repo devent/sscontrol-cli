@@ -19,6 +19,5 @@
 package apache_authfiledigest.ubuntu_10_04
 
 hosts {
-	ip "192.168.0.100" host "ubuntutest.com" alias "ubuntu"
-	ip "192.168.0.100" host "admin.ubuntutest.com" alias "admin"
+	ip "192.168.0.100" host "server1.ubuntutest.com" alias "server1" //*
 }
