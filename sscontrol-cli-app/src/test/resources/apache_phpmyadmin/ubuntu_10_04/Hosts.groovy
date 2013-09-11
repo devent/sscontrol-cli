@@ -16,8 +16,9 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with sscontrol-cli-app. If not, see <http://www.gnu.org/licenses/>.
  */
-package maradns.ubuntu_10_04
+package apache_phpmyadmin.ubuntu_10_04
 
-hostname { //.
-	set "ubuntu" //.
+hosts {
+	ip "192.168.0.100" host "ubuntutest.com" alias "ubuntu"
+	ip "192.168.0.100" host "admin.ubuntutest.com" alias "admin"
 }

@@ -16,8 +16,12 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with sscontrol-cli-app. If not, see <http://www.gnu.org/licenses/>.
  */
-package maradns.ubuntu_10_04
-
-hostname { //.
-	set "ubuntu" //.
+package uwf.ubuntu_10_04
+firewall {
+	deny
+	allow port: "ssh"
+	allow port: "smtp"
+	allow port: "smtps"
+	allow port: "http"
+	allow port: "https"
 }

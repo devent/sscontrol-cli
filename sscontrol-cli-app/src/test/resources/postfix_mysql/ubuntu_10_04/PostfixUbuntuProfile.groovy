@@ -16,8 +16,16 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with sscontrol-cli-app. If not, see <http://www.gnu.org/licenses/>.
  */
-package maradns.ubuntu_10_04
+package postfix_mysql.ubuntu_10_04
 
-hostname { //.
-	set "ubuntu" //.
+profile "ubuntu_10_04", {
+	hostname { }
+	hosts { }
+	dns { service "maradns" }
+	database { service "mysql" }
+	mail {
+		service "postfix"
+		storage "mysql"
+	}
+	dhclient { }
 }

@@ -16,8 +16,20 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with sscontrol-cli-app. If not, see <http://www.gnu.org/licenses/>.
  */
-package maradns.ubuntu_10_04
+package apache_phpmyadmin.ubuntu_10_04
 
-hostname { //.
-	set "ubuntu" //.
+httpd {
+	domain "ubuntutest.com", address: "192.168.0.100", {
+		redirect to_www
+		redirect http_to_https
+	}
+	ssl_domain "admit.ubuntutest.com", address: "192.168.0.100", {
+		certification_file "/home/devent/certs/admin.ubuntutest.com.crt"
+		certification_key_file "/home/devent/certs/admin.ubuntutest.com.key.insecure"
+		setup "phpmyadmin", alias: "phpmyadmin", {
+			admin "root", password: "mysqladminpassword"
+			control "phpmyadmin", password: "phpmyadminpassword", database: "phpmyadmin"
+			server "127.0.0.1", port: 3306
+		}
+	}
 }

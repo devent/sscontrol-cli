@@ -16,8 +16,34 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with sscontrol-cli-app. If not, see <http://www.gnu.org/licenses/>.
  */
-package maradns.ubuntu_10_04
+package postfix_mysql.ubuntu_10_04
 
-hostname { //.
-	set "ubuntu" //.
+mail {
+	bind_addresses all
+
+	name "mail.ubuntutest.com"
+	origin "ubuntutest.com"
+	database "maildb" user "mail" password "mailpassword"
+
+	masquerade {
+		domains "mail.ubuntutest.com"
+		users "root"
+	}
+
+	domain "localhost.localdomain", { catchall destination: "@localhost" }
+	domain "localhost", {
+		alias "postmaster", destination: "root"
+		alias "sysadmin", destination: "root"
+		alias "webmaster", destination: "root"
+		alias "abuse", destination: "root"
+		alias "root", destination: "root"
+		catchall destination: "root"
+		user "root", password: "rootpasswd"
+	}
+
+	domain "admin.ubuntutest.com", { catchall destination: "@ubuntutest.com" }
+	domain "ubuntutest.com", {
+		user "admin", password: "admin12"
+		user "userfoo", password: "foo12"
+	}
 }

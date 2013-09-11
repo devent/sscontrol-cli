@@ -16,8 +16,11 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with sscontrol-cli-app. If not, see <http://www.gnu.org/licenses/>.
  */
-package maradns.ubuntu_10_04
-
-hostname { //.
-	set "ubuntu" //.
+package apache_phpldapadmin.ubuntu_10_04
+database {
+	debugging true
+	bind_address "127.0.0.1"
+	admin_password "mysqladminpassword"
+	database "phpmyadmin"
+	user "phpmyadmin", password: "phpmyadminpassword", { use_database "phpmyadmin" }
 }
