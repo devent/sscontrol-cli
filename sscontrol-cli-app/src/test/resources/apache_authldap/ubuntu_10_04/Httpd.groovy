@@ -23,7 +23,7 @@ httpd {
 		redirect to_www
 		redirect http_to_https
 	}
-	ssl_domain "admit.ubuntutest.com", address: "192.168.0.100", {
+	ssl_domain "admin.ubuntutest.com", address: "192.168.0.100", {
 		certification_file "/home/devent/certs/admin.ubuntutest.com.crt"
 		certification_key_file "/home/devent/certs/admin.ubuntutest.com.key.insecure"
 		auth "Admin Access", location: "/admin", provider: ldap, {
