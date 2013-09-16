@@ -20,10 +20,10 @@ package postfix_mysql.ubuntu_10_04
 
 mail {
 	bind_addresses all
-
 	name "mail.ubuntutest.com"
 	origin "ubuntutest.com"
 	database "maildb" user "mail" password "mailpassword"
+	reset domains: yes
 
 	masquerade {
 		domains "mail.ubuntutest.com"
@@ -32,18 +32,21 @@ mail {
 
 	domain "localhost.localdomain", { catchall destination: "@localhost" }
 	domain "localhost", {
-		alias "postmaster", destination: "root"
-		alias "sysadmin", destination: "root"
-		alias "webmaster", destination: "root"
-		alias "abuse", destination: "root"
-		alias "root", destination: "root"
-		catchall destination: "root"
-		user "root", password: "rootpasswd"
+		alias "postmaster", destination: "admin@ubuntutest.com"
+		alias "sysadmin", destination: "admin@ubuntutest.com"
+		alias "webmaster", destination: "admin@ubuntutest.com"
+		alias "abuse", destination: "admin@ubuntutest.com"
+		alias "root", destination: "admin@ubuntutest.com"
 	}
 
 	domain "admin.ubuntutest.com", { catchall destination: "@ubuntutest.com" }
 	domain "ubuntutest.com", {
 		user "admin", password: "admin12"
+		user "devent", password: "devent12"
 		user "userfoo", password: "foo12"
+		alias "postmaster", destination: "admin"
+		alias "sysadmin", destination: "admin"
+		alias "webmaster", destination: "admin"
+		alias "abuse", destination: "admin"
 	}
 }
