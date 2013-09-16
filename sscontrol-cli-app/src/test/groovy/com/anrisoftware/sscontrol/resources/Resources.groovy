@@ -44,7 +44,7 @@ class Resources {
 
 	public static final URL restartCommand = Resources.class.getResource("echo_command.txt")
 
-	public static final URL hostnameRestartCommand = Resources.class.getResource("hostname_restart_command.txt")
+	public static final URL hostnameRestartCommand = Resources.class.getResource("echo_command.txt")
 
 	public static final URL defaultHosts = Resources.class.getResource("hosts.txt")
 
@@ -52,5 +52,5 @@ class Resources {
 
 	public static final URL aptitudeOutExpected = Resources.class.getResource("aptitude_out_expected.txt")
 
-	public static final URL restartOutExpected = Resources.class.getResource("restart_out_expected.txt")
+	public static final URL hostnameRestartOutExpected = Resources.class.getResource("hostname_restart_out_expected.txt")
 }

@@ -24,12 +24,11 @@ def restart = "/sbin/restart"
 profile "ubuntu_10_04", {
 	hostname {
 		install_command "$prefix$aptitude update && $prefix$aptitude install"
-		restart_command "$prefix$restart"
+		restart_command "${prefix}/etc/init.d/hostname restart"
 		configuration_directory "$prefix/etc"
 	}
 	hosts {
 		install_command "$prefix$aptitude update && $prefix$aptitude install"
-		restart_command "$prefix$restart"
 		configuration_directory "$prefix/etc"
 	}
 }

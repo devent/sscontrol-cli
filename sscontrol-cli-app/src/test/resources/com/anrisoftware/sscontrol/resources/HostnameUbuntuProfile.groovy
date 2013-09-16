@@ -18,9 +18,9 @@
  */
 package com.anrisoftware.sscontrol.resources
 profile "ubuntu_10_04", {
-	system {
+	hostname {
 		install_command "${prefix}/usr/bin/aptitude update && ${prefix}/usr/bin/aptitude install"
-		restart_command "${prefix}/sbin/restart hostname"
+		restart_command "${prefix}/etc/init.d/hostname restart"
+		configuration_directory "${prefix}/etc"
 	}
-	hostname { configuration_directory "${prefix}/etc" }
 }

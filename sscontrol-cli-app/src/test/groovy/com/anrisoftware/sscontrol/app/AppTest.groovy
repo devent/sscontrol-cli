@@ -84,7 +84,7 @@ class AppTest {
 		copyURLToFile hostnameScript, new File(tmpdir, "Hostname.groovy")
 		copyURLToFile hostsScript, new File(tmpdir, "Hosts.groovy")
 		copyResourceToCommand installCommand, new File(tmpdir, "/usr/bin/aptitude")
-		copyResourceToCommand hostnameRestartCommand, new File(tmpdir, "/sbin/restart")
+		copyResourceToCommand hostnameRestartCommand, new File(tmpdir, "/etc/init.d/hostname")
 
 		String profile = "ubuntu_10_04"
 		String[] args = [
@@ -101,14 +101,14 @@ class AppTest {
 		app.start args
 		assertFileContent hostsFile, hostsExpected
 		assertFileContent aptitudeOut, aptitudeOutExpected
-		assertFileContent restartOut, restartOutExpected
+		assertFileContent hostnameRestartOut, hostnameRestartOutExpected
 	}
 
 	@Test
 	void "hostname, hosts service from archive zip"() {
 		copyURLToFile profilesZip, profilesZipTmp
 		copyResourceToCommand installCommand, new File(tmpdir, "/usr/bin/aptitude")
-		copyResourceToCommand hostnameRestartCommand, new File(tmpdir, "/sbin/restart")
+		copyResourceToCommand hostnameRestartCommand, new File(tmpdir, "/etc/init.d/hostname")
 
 		String profile = "ubuntu_10_04"
 		String[] args = [
@@ -125,7 +125,7 @@ class AppTest {
 		app.start args
 		assertFileContent hostsFile, hostsExpected
 		assertFileContent aptitudeOut, aptitudeOutExpected
-		assertFileContent restartOut, restartOutExpected
+		assertFileContent hostnameRestartOut, hostnameRestartOut
 	}
 
 	static Injector injector
@@ -141,7 +141,7 @@ class AppTest {
 
 	File aptitudeOut
 
-	File restartOut
+	File hostnameRestartOut
 
 	File profilesZipTmp
 
@@ -157,7 +157,7 @@ class AppTest {
 		tmpdir = tmp.newFolder()
 		hostsFile = new File(tmpdir, "etc/hosts")
 		aptitudeOut = new File(tmpdir, "usr/bin/aptitude.out")
-		restartOut = new File(tmpdir, "sbin/restart.out")
+		hostnameRestartOut = new File(tmpdir, "etc/init.d/hostname.out")
 		profilesZipTmp = new File(tmpdir, "profiles.zip")
 		variables.prefix = tmpdir.absolutePath
 	}
