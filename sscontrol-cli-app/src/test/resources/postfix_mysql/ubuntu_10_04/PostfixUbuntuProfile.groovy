@@ -26,6 +26,7 @@ profile "ubuntu_10_04", {
 	mail {
 		service "postfix"
 		storage "mysql"
+		delivery "courier"
 	}
 	dhclient { }
 }

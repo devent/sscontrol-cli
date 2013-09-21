@@ -19,10 +19,11 @@
 package postfix_mysql.ubuntu_10_04
 
 mail {
+	debug logging: 2
 	bind_addresses all
 	name "mail.ubuntutest.com"
 	origin "ubuntutest.com"
-	database "maildb" user "mail" password "mailpassword"
+	database "maildb", user: "mail", password: "mailpassword"
 	reset domains: yes
 
 	masquerade {
