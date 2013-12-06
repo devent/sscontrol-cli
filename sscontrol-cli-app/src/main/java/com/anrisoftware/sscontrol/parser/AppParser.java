@@ -26,6 +26,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,6 +68,8 @@ public class AppParser implements AppModel {
 
     private Map<String, Object> variables;
 
+    private List<String> services;
+
     /**
      * Parses the specified command line arguments.
      * 
@@ -93,6 +96,17 @@ public class AppParser implements AppModel {
         this.scripts = parseScripts(args);
         this.servers = parseAddresses(args);
         this.variables = parseVariables(args);
+        this.services = parseServices(args);
+    }
+
+    private List<String> parseServices(AppArgs args) {
+        String[] strings = split(args.getServices(),
+                properties.getCommandLineSeparator());
+        List<String> services = new ArrayList<String>();
+        if (strings != null) {
+            services.addAll(Arrays.asList(strings));
+        }
+        return services;
     }
 
     private List<URI> parseScripts(AppArgs args) {
@@ -172,6 +186,21 @@ public class AppParser implements AppModel {
     @Override
     public List<InetSocketAddress> getServers() {
         return servers;
+    }
+
+    @Override
+    public List<String> getServices() {
+        return services;
+    }
+
+    @Override
+    public boolean containsService(String name) {
+        List<String> services = getServices();
+        if (services.size() < 1) {
+            return true;
+        } else {
+            return services.contains(name);
+        }
     }
 
     @Override

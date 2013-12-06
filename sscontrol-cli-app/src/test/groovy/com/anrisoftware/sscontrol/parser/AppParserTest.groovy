@@ -145,6 +145,44 @@ class AppParserTest {
         assert model.scriptVariables.values().contains(valueB)
     }
 
+    @Test
+    void "parse service"() {
+        def serviceA = "serviceA"
+        String[] args = [
+            "-scripts",
+            dirA,
+            "-profile",
+            profile,
+            "-server",
+            serverA,
+            "-services",
+            "$serviceA"
+        ]
+        AppModel model = injector.getInstance(AppParser).parse(args)
+        assert model.services.size() == 1
+        assert model.services.contains(serviceA)
+    }
+
+    @Test
+    void "parse multiple services"() {
+        def serviceA = "serviceA"
+        def serviceB = "serviceB"
+        String[] args = [
+            "-scripts",
+            dirA,
+            "-profile",
+            profile,
+            "-server",
+            serverA,
+            "-services",
+            "$serviceA,$serviceB"
+        ]
+        AppModel model = injector.getInstance(AppParser).parse(args)
+        assert model.services.size() == 2
+        assert model.services.contains(serviceA)
+        assert model.services.contains(serviceB)
+    }
+
     static Injector injector = Guice.createInjector(new AppModule())
 
     static String dirA = "somedirA"

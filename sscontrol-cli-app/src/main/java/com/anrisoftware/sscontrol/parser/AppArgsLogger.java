@@ -3,6 +3,7 @@ package com.anrisoftware.sscontrol.parser;
 import static com.anrisoftware.sscontrol.parser.AppArgsLogger._.profile_set;
 import static com.anrisoftware.sscontrol.parser.AppArgsLogger._.scripts_set;
 import static com.anrisoftware.sscontrol.parser.AppArgsLogger._.servers_set;
+import static com.anrisoftware.sscontrol.parser.AppArgsLogger._.services_set;
 import static com.anrisoftware.sscontrol.parser.AppArgsLogger._.variables_set;
 
 import com.anrisoftware.globalpom.log.AbstractLogger;
@@ -23,7 +24,9 @@ class AppArgsLogger extends AbstractLogger {
 
         servers_set("Servers set: '{}'."),
 
-        variables_set("Variables set: '{}'.");
+        variables_set("Variables set: '{}'."),
+
+        services_set("Services set: '{}'.");
 
         private String name;
 
@@ -58,5 +61,9 @@ class AppArgsLogger extends AbstractLogger {
 
     void variablesSet(String variables) {
         debug(variables_set, variables);
+    }
+
+    void servicesSet(String services) {
+        debug(services_set, services);
     }
 }

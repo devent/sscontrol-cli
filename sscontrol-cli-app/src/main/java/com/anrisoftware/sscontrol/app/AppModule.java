@@ -34,13 +34,13 @@ import com.google.inject.AbstractModule;
  */
 public class AppModule extends AbstractModule {
 
-	@Override
-	protected void configure() {
-		install(new FileSystemModule());
-		install(new ParserModelModule());
-		install(new CoreModule());
-		install(new ServiceModule());
-		install(new CoreResourcesModule());
+    @Override
+    protected void configure() {
+        install(new FileSystemModule());
+        install(new ParserModelModule());
+        install(new CoreModule());
+        install(new ServiceModule());
+        install(new CoreResourcesModule());
         install(new InetSocketAddressFormatModule());
-	}
+    }
 }

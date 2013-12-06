@@ -31,34 +31,51 @@ import java.util.Map;
  */
 public interface AppModel {
 
-	/**
-	 * Returns the locations for the server scripts.
-	 * 
-	 * @return the {@link List} of the server scripts locations.
-	 */
-	List<URI> getScriptsLocations();
+    /**
+     * Returns the locations for the server scripts.
+     * 
+     * @return the {@link List} of the server scripts locations.
+     */
+    List<URI> getScriptsLocations();
 
-	/**
-	 * Returns the profile to activate.
-	 * 
-	 * @return the profile name.
-	 */
-	String getProfile();
+    /**
+     * Returns the profile to activate.
+     * 
+     * @return the profile name.
+     */
+    String getProfile();
 
-	/**
-	 * Returns the servers to where the services should be deployed.
-	 * 
-	 * @return the {@link List} of the server address and port number.
-	 */
-	List<InetSocketAddress> getServers();
+    /**
+     * Returns the servers to where the services should be deployed.
+     * 
+     * @return the {@link List} of the server address and port number.
+     */
+    List<InetSocketAddress> getServers();
 
-	/**
-	 * Returns a map with additional script variables. The variables are set in
-	 * each of the service scripts.
-	 * 
-	 * @return the {@link Map} of the script variables, with the key as the
-	 *         variable name and the value as the variable value.
-	 */
-	Map<String, Object> getScriptVariables();
+    /**
+     * Returns the name of the services to be deployed.
+     * 
+     * @return the {@link List} with the service names.
+     */
+    List<String> getServices();
+
+    /**
+     * Tests if the service should be deployed.
+     * 
+     * @param name
+     *            the {@link String} name of the service.
+     * 
+     * @return {@code true} if the service should be deployed.
+     */
+    boolean containsService(String name);
+
+    /**
+     * Returns a map with additional script variables. The variables are set in
+     * each of the service scripts.
+     * 
+     * @return the {@link Map} of the script variables, with the key as the
+     *         variable name and the value as the variable value.
+     */
+    Map<String, Object> getScriptVariables();
 
 }

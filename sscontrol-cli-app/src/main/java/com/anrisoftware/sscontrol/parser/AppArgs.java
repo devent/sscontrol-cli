@@ -41,6 +41,8 @@ class AppArgs {
 
     private String variables;
 
+    private String services;
+
     @Option(name = "-scripts", required = true)
     public void setScripts(String scripts) {
         this.scripts = scripts;
@@ -69,6 +71,16 @@ class AppArgs {
 
     public String getServers() {
         return servers;
+    }
+
+    @Option(name = "-services", required = false)
+    public void setServices(String services) {
+        this.services = services;
+        log.servicesSet(services);
+    }
+
+    public String getServices() {
+        return services;
     }
 
     @Option(name = "-variables", required = false)

@@ -1,18 +1,18 @@
 /*
  * Copyright 2013 Erwin Müller <erwin.mueller@deventm.org>
- * 
+ *
  * This file is part of sscontrol-cli-app.
- * 
+ *
  * sscontrol-cli-app is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Affero General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * sscontrol-cli-app is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU Affero General Public License
  * along with sscontrol-cli-app. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -45,119 +45,123 @@ import com.anrisoftware.sscontrol.services.ServiceLoad;
  */
 public class App {
 
-	@Inject
-	private AppLogger log;
+    @Inject
+    private AppLogger log;
 
-	@Inject
-	private AppParser parser;
+    @Inject
+    private AppParser parser;
 
-	@Inject
-	private ServicesRegistry registry;
+    @Inject
+    private ServicesRegistry registry;
 
-	@Inject
-	private FileSystem fileSystem;
+    @Inject
+    private FileSystem fileSystem;
 
-	@Inject
-	private ProfileSearch profileSearch;
+    @Inject
+    private ProfileSearch profileSearch;
 
-	@Inject
-	private ServiceLoad serviceLoad;
+    @Inject
+    private ServiceLoad serviceLoad;
 
-	private AppModel model;
+    private AppModel model;
 
-	private ProfileService profile;
+    private ProfileService profile;
 
-	/**
-	 * Parses the command line arguments and starts the services.
-	 * 
-	 * @param args
-	 *            the command line arguments.
-	 * 
-	 * @throws AppException
-	 *             if an error occurred that causes the application to
-	 *             terminate.
-	 */
-	public void start(String[] args) throws AppException {
-		model = parseArguments(args);
-		setupLocations();
-		profile = searchProfile();
-		if (profile == null) {
-			throw log.noProfileFound(model);
-		}
-		loadServices();
-		startServices();
-	}
+    /**
+     * Parses the command line arguments and starts the services.
+     * 
+     * @param args
+     *            the command line arguments.
+     * 
+     * @throws AppException
+     *             if an error occurred that causes the application to
+     *             terminate.
+     */
+    public void start(String[] args) throws AppException {
+        model = parseArguments(args);
+        setupLocations();
+        profile = searchProfile();
+        loadServices();
+        startServices();
+    }
 
-	private void startServices() throws AppException {
-		for (String name : profile.getEntryNames()) {
-			if (!registry.haveService(name)) {
-				continue;
-			}
-			for (Service service : registry.getService(name)) {
-				startService(service);
-			}
-		}
-	}
+    private void startServices() throws AppException {
+        for (String name : profile.getEntryNames()) {
+            if (!registry.haveService(name)) {
+                continue;
+            }
+            for (Service service : registry.getService(name)) {
+                startService(service);
+            }
+        }
+    }
 
-	private void startService(Service service) throws AppException {
-		try {
-			String name = service.getName();
-			service.call();
-			log.finishService(name);
-		} catch (Exception e) {
-			throw log.errorStartService(e, service);
-		}
-	}
+    private void startService(Service service) throws AppException {
+        try {
+            String name = service.getName();
+            service.call();
+            log.finishService(name);
+        } catch (Exception e) {
+            throw log.errorStartService(e, service);
+        }
+    }
 
-	private void loadServices() throws AppException {
-		for (String name : profile.getEntryNames()) {
-			if ("system".equals(name)) {
-				continue;
-			}
-			try {
-				Map<String, Object> variables = model.getScriptVariables();
-				serviceLoad.loadService(name, fileSystem, registry, profile,
-						variables);
-			} catch (FileSystemException e) {
-				throw log.errorSearchService(name, e);
-			} catch (ServiceException e) {
-				throw log.errorLoadService(name, e);
-			}
-		}
-	}
+    private void loadServices() throws AppException {
+        for (String name : profile.getEntryNames()) {
+            if ("system".equals(name)) {
+                continue;
+            }
+            if (!model.containsService(name)) {
+                continue;
+            }
+            try {
+                Map<String, Object> variables = model.getScriptVariables();
+                serviceLoad.loadService(name, fileSystem, registry, profile,
+                        variables);
+            } catch (FileSystemException e) {
+                throw log.errorSearchService(name, e);
+            } catch (ServiceException e) {
+                throw log.errorLoadService(name, e);
+            }
+        }
+    }
 
-	private ProfileService searchProfile() throws AppException {
-		String name = model.getProfile();
-		Map<String, Object> variables = model.getScriptVariables();
-		try {
-			return profileSearch.searchProfile(name, fileSystem, registry,
-					variables);
-		} catch (FileSystemException e) {
-			throw log.errorSearchProfile(name, e);
-		} catch (ServiceException e) {
-			log.errorLoadProfile(name, e);
-			return null;
-		}
-	}
+    private ProfileService searchProfile() throws AppException {
+        String name = model.getProfile();
+        Map<String, Object> variables = model.getScriptVariables();
+        ProfileService profile = null;
+        try {
+            profile = profileSearch.searchProfile(name, fileSystem, registry,
+                    variables);
+        } catch (FileSystemException e) {
+            throw log.errorSearchProfile(name, e);
+        } catch (ServiceException e) {
+            log.errorLoadProfile(name, e);
+        }
+        if (profile == null) {
+            throw log.noProfileFound(model);
+        }
+        return profile;
+    }
 
-	private void setupLocations() throws AppException {
-		for (URI location : model.getScriptsLocations()) {
-			try {
-				fileSystem.addLocation(location.toURL());
-			} catch (FileSystemException e) {
-				throw log.errorAddLocation(location, e);
-			} catch (MalformedURLException e) {
-				throw log.malformedLocation(location, e);
-			}
-		}
-	}
+    private void setupLocations() throws AppException {
+        for (URI location : model.getScriptsLocations()) {
+            try {
+                fileSystem.addLocation(location.toURL());
+            } catch (FileSystemException e) {
+                throw log.errorAddLocation(location, e);
+            } catch (MalformedURLException e) {
+                throw log.malformedLocation(location, e);
+            }
+        }
+    }
 
-	private AppModel parseArguments(String[] args) throws AppException {
-		try {
-			return parser.parse(args);
-		} catch (ModelException e) {
-			throw log.errorParseArguments(args, e);
-		}
-	}
+    private AppModel parseArguments(String[] args) throws AppException {
+        try {
+            return parser.parse(args);
+        } catch (ModelException e) {
+            throw log.errorParseArguments(args, e);
+        }
+    }
 
 }

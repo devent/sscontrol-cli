@@ -39,131 +39,157 @@ import com.google.inject.Injector
  */
 class AppTest {
 
-	@Test
-	void "invalid arguments"() {
-		String[] args = []
-		App app = injector.getInstance App
-		shouldFailWith AppException, { app.start(args) }
-	}
+    @Test
+    void "invalid arguments"() {
+        String[] args = []
+        App app = injector.getInstance App
+        shouldFailWith AppException, { app.start(args) }
+    }
 
-	@Test
-	void "profile not found"() {
-		copyURLToFile hostnameUbuntuProfile, new File(tmpdir, "Ubuntu_10_04Profile.groovy")
-		String profile = "notdefined"
-		String[] args = [
-			"-scripts",
-			"file://${tmpdir.absolutePath}",
-			"-profile",
-			profile,
-			"-server",
-			localServer,
-		]
-		App app = injector.getInstance App
-		shouldFailWith AppException, { app.start(args) }
-	}
+    @Test
+    void "profile not found"() {
+        copyURLToFile hostnameUbuntuProfile, new File(tmpdir, "Ubuntu_10_04Profile.groovy")
+        String profile = "notdefined"
+        String[] args = [
+            "-scripts",
+            "file://${tmpdir.absolutePath}",
+            "-profile",
+            profile,
+            "-server",
+            localServer,
+        ]
+        App app = injector.getInstance App
+        shouldFailWith AppException, { app.start(args) }
+    }
 
-	@Test
-	void "no service file"() {
-		copyURLToFile hostnameUbuntuProfile, new File(tmpdir, "Ubuntu_10_04Profile.groovy")
-		String profile = "ubuntu_10_04"
-		String[] args = [
-			"-scripts",
-			"file://${tmpdir.absolutePath}",
-			"-profile",
-			profile,
-			"-server",
-			localServer,
-		]
-		App app = injector.getInstance App
-		shouldFailWith(AppException) { app.start args }
-	}
+    @Test
+    void "no service file"() {
+        copyURLToFile hostnameUbuntuProfile, new File(tmpdir, "Ubuntu_10_04Profile.groovy")
+        String profile = "ubuntu_10_04"
+        String[] args = [
+            "-scripts",
+            "file://${tmpdir.absolutePath}",
+            "-profile",
+            profile,
+            "-server",
+            localServer,
+        ]
+        App app = injector.getInstance App
+        shouldFailWith(AppException) { app.start args }
+    }
 
-	@Test
-	void "hostname, hosts service"() {
-		copyURLToFile hostsHostnameUbuntuProfile, new File(tmpdir, "Ubuntu_10_04Profile.groovy")
-		copyURLToFile hostnameScript, new File(tmpdir, "Hostname.groovy")
-		copyURLToFile hostsScript, new File(tmpdir, "Hosts.groovy")
-		copyResourceToCommand installCommand, new File(tmpdir, "/usr/bin/aptitude")
-		copyResourceToCommand hostnameRestartCommand, new File(tmpdir, "/etc/init.d/hostname")
+    @Test
+    void "hostname, hosts service"() {
+        copyURLToFile hostsHostnameUbuntuProfile, new File(tmpdir, "Ubuntu_10_04Profile.groovy")
+        copyURLToFile hostnameScript, new File(tmpdir, "Hostname.groovy")
+        copyURLToFile hostsScript, new File(tmpdir, "Hosts.groovy")
+        copyResourceToCommand installCommand, new File(tmpdir, "/usr/bin/aptitude")
+        copyResourceToCommand hostnameRestartCommand, new File(tmpdir, "/etc/init.d/hostname")
 
-		String profile = "ubuntu_10_04"
-		String[] args = [
-			"-scripts",
-			"file://${tmpdir.absolutePath}",
-			"-profile",
-			profile,
-			"-server",
-			localServer,
-			"-variables",
-			"prefix=$variables.prefix"
-		]
-		App app = injector.getInstance App
-		app.start args
-		assertFileContent hostsFile, hostsExpected
-		assertFileContent aptitudeOut, aptitudeOutExpected
-		assertFileContent hostnameRestartOut, hostnameRestartOutExpected
-	}
+        String profile = "ubuntu_10_04"
+        String[] args = [
+            "-scripts",
+            "file://${tmpdir.absolutePath}",
+            "-profile",
+            profile,
+            "-server",
+            localServer,
+            "-variables",
+            "prefix=$variables.prefix"
+        ]
+        App app = injector.getInstance App
+        app.start args
+        assertFileContent hostsFile, hostsExpected
+        assertFileContent aptitudeOut, aptitudeOutExpected
+        assertFileContent hostnameRestartOut, hostnameRestartOutExpected
+    }
 
-	@Test
-	void "hostname, hosts service from archive zip"() {
-		copyURLToFile profilesZip, profilesZipTmp
-		copyResourceToCommand installCommand, new File(tmpdir, "/usr/bin/aptitude")
-		copyResourceToCommand hostnameRestartCommand, new File(tmpdir, "/etc/init.d/hostname")
+    @Test
+    void "hostname, hosts service from archive zip"() {
+        copyURLToFile profilesZip, profilesZipTmp
+        copyResourceToCommand installCommand, new File(tmpdir, "/usr/bin/aptitude")
+        copyResourceToCommand hostnameRestartCommand, new File(tmpdir, "/etc/init.d/hostname")
 
-		String profile = "ubuntu_10_04"
-		String[] args = [
-			"-scripts",
-			"file://${profilesZipTmp.absolutePath}",
-			"-profile",
-			profile,
-			"-server",
-			localServer,
-			"-variables",
-			"prefix=$variables.prefix"
-		]
-		App app = injector.getInstance App
-		app.start args
-		assertFileContent hostsFile, hostsExpected
-		assertFileContent aptitudeOut, aptitudeOutExpected
-		assertFileContent hostnameRestartOut, hostnameRestartOut
-	}
+        String profile = "ubuntu_10_04"
+        String[] args = [
+            "-scripts",
+            "file://${profilesZipTmp.absolutePath}",
+            "-profile",
+            profile,
+            "-server",
+            localServer,
+            "-variables",
+            "prefix=$variables.prefix"
+        ]
+        App app = injector.getInstance App
+        app.start args
+        assertFileContent hostsFile, hostsExpected
+        assertFileContent aptitudeOut, aptitudeOutExpected
+        assertFileContent hostnameRestartOut, hostnameRestartOut
+    }
 
-	static Injector injector
+    @Test
+    void "hostname, not hosts service from archive zip"() {
+        copyURLToFile profilesZip, profilesZipTmp
+        copyResourceToCommand installCommand, new File(tmpdir, "/usr/bin/aptitude")
+        copyResourceToCommand hostnameRestartCommand, new File(tmpdir, "/etc/init.d/hostname")
 
-	static String localServer = "127.0.0.1"
+        String profile = "ubuntu_10_04"
+        String[] args = [
+            "-scripts",
+            "file://${profilesZipTmp.absolutePath}",
+            "-profile",
+            profile,
+            "-server",
+            localServer,
+            "-variables",
+            "prefix=$variables.prefix",
+            "-services",
+            "hostname"
+        ]
+        App app = injector.getInstance App
+        app.start args
+        assert !hostsFile.exists()
+        assertFileContent aptitudeOut, aptitudeOutExpected
+        assertFileContent hostnameRestartOut, hostnameRestartOut
+    }
 
-	@Rule
-	public TemporaryFolder tmp = new TemporaryFolder()
+    static Injector injector
 
-	File tmpdir
+    static String localServer = "127.0.0.1"
 
-	File hostsFile
+    @Rule
+    public TemporaryFolder tmp = new TemporaryFolder()
 
-	File aptitudeOut
+    File tmpdir
 
-	File hostnameRestartOut
+    File hostsFile
 
-	File profilesZipTmp
+    File aptitudeOut
 
-	Map variables = [:]
+    File hostnameRestartOut
 
-	@BeforeClass
-	static void createInjector() {
-		injector = Guice.createInjector(new AppModule())
-	}
+    File profilesZipTmp
 
-	@Before
-	void createTemp() {
-		tmpdir = tmp.newFolder()
-		hostsFile = new File(tmpdir, "etc/hosts")
-		aptitudeOut = new File(tmpdir, "usr/bin/aptitude.out")
-		hostnameRestartOut = new File(tmpdir, "etc/init.d/hostname.out")
-		profilesZipTmp = new File(tmpdir, "profiles.zip")
-		variables.prefix = tmpdir.absolutePath
-	}
+    Map variables = [:]
 
-	@BeforeClass
-	static void setupToStringStyle() {
-		toStringStyle
-	}
+    @BeforeClass
+    static void createInjector() {
+        injector = Guice.createInjector(new AppModule())
+    }
+
+    @Before
+    void createTemp() {
+        tmpdir = tmp.newFolder()
+        hostsFile = new File(tmpdir, "etc/hosts")
+        aptitudeOut = new File(tmpdir, "usr/bin/aptitude.out")
+        hostnameRestartOut = new File(tmpdir, "etc/init.d/hostname.out")
+        profilesZipTmp = new File(tmpdir, "profiles.zip")
+        variables.prefix = tmpdir.absolutePath
+    }
+
+    @BeforeClass
+    static void setupToStringStyle() {
+        toStringStyle
+    }
 }
