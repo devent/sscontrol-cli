@@ -26,13 +26,13 @@ import javax.inject.Inject;
 
 import com.anrisoftware.sscontrol.appmodel.AppModel;
 import com.anrisoftware.sscontrol.appmodel.ModelException;
-import com.anrisoftware.sscontrol.cli.CliParser;
 import com.anrisoftware.sscontrol.core.api.ProfileService;
 import com.anrisoftware.sscontrol.core.api.Service;
 import com.anrisoftware.sscontrol.core.api.ServiceException;
 import com.anrisoftware.sscontrol.core.api.ServicesRegistry;
 import com.anrisoftware.sscontrol.filesystem.FileSystem;
 import com.anrisoftware.sscontrol.filesystem.FileSystemException;
+import com.anrisoftware.sscontrol.parser.AppParser;
 import com.anrisoftware.sscontrol.services.ProfileSearch;
 import com.anrisoftware.sscontrol.services.ServiceLoad;
 
@@ -49,7 +49,7 @@ public class App {
 	private AppLogger log;
 
 	@Inject
-	private CliParser parser;
+	private AppParser parser;
 
 	@Inject
 	private ServicesRegistry registry;

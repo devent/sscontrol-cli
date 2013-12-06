@@ -16,36 +16,20 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with sscontrol-cli-app. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.anrisoftware.sscontrol.app;
+package com.anrisoftware.sscontrol.parser;
 
-import java.net.URL;
-
-import javax.inject.Singleton;
-
-import com.anrisoftware.propertiesutils.AbstractContextPropertiesProvider;
+import com.google.inject.AbstractModule;
 
 /**
- * Provides the application properties.
- * <p>
- * The application properties are loaded from {@code app.properties}.
+ * Binds the application model to Args4j annotated application model.
  * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.0
  */
-@SuppressWarnings("serial")
-@Singleton
-public class AppProperties extends AbstractContextPropertiesProvider {
+public class ParserModelModule extends AbstractModule {
 
-	/**
-	 * Default application port.
-	 */
-	public static final String APPLICATION_PORT_PROPERTY = "application_port";
-
-	private static final URL RESOURCE = AppProperties.class
-			.getResource("/app.properties");
-
-	AppProperties() {
-		super(App.class, RESOURCE);
+	@Override
+	protected void configure() {
 	}
 
 }

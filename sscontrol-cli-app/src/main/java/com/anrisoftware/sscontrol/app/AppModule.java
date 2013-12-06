@@ -18,11 +18,12 @@
  */
 package com.anrisoftware.sscontrol.app;
 
-import com.anrisoftware.sscontrol.cli.CliModelModule;
+import com.anrisoftware.globalpom.format.inetsocketaddress.InetSocketAddressFormatModule;
 import com.anrisoftware.sscontrol.core.modules.CoreModule;
 import com.anrisoftware.sscontrol.core.modules.CoreResourcesModule;
 import com.anrisoftware.sscontrol.core.service.ServiceModule;
 import com.anrisoftware.sscontrol.filesystem.FileSystemModule;
+import com.anrisoftware.sscontrol.parser.ParserModelModule;
 import com.google.inject.AbstractModule;
 
 /**
@@ -36,9 +37,10 @@ public class AppModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		install(new FileSystemModule());
-		install(new CliModelModule());
+		install(new ParserModelModule());
 		install(new CoreModule());
 		install(new ServiceModule());
 		install(new CoreResourcesModule());
+        install(new InetSocketAddressFormatModule());
 	}
 }

@@ -36,16 +36,15 @@ public class TextsProvider implements Provider<Texts> {
 
 	private static final String RESOURCES_NAME = App.class.getSimpleName();
 
-	@Inject
-	private TextsFactory textsFactory;
+    private final Texts texts;
 
-	private Texts texts;
+    @Inject
+    TextsProvider(TextsFactory textsFactory) {
+        this.texts = textsFactory.create(RESOURCES_NAME);
+    }
 
 	@Override
 	public Texts get() {
-		if (this.texts == null) {
-			this.texts = textsFactory.create(RESOURCES_NAME);
-		}
 		return texts;
 	}
 
