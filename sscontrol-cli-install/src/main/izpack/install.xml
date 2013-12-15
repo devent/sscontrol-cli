@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright 2013 Erwin Müller <erwin.mueller@deventm.org>
+    Copyright 2011-2013 Erwin Müller <erwin.mueller@deventm.org>
 
-    This file is part of sscontrol-cli-install.
+    This file is part of globalpom-izpack.
 
-    sscontrol-cli-install is free software: you can redistribute it and/or modify it
-    under the terms of the GNU Affero General Public License as published by the
+    globalpom-izpack is free software: you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as published by the
     Free Software Foundation, either version 3 of the License, or (at your
     option) any later version.
 
-    sscontrol-cli-install is distributed in the hope that it will be useful, but
+    globalpom-izpack is distributed in the hope that it will be useful, but
     WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-    FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
-    for more details.
+    FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+    details.
 
-    You should have received a copy of the GNU Affero General Public License
-    along with sscontrol-cli-install. If not, see <http://www.gnu.org/licenses/>.
+    You should have received a copy of the GNU Lesser General Public License
+    along with globalpom-izpack. If not, see <http://www.gnu.org/licenses/>.
 
 -->
 <installation version="1.0">
@@ -65,14 +65,11 @@
 		<pack name="Linux run files" required="no" preselected="yes" os="unix"
 			installGroups="Linux noarch">
 			<description>Linux run files.</description>
-			<file src="bin/linux/" targetdir="$INSTALL_PATH/bin/" />
-            <file src="etc/en_US/" targetdir="$INSTALL_PATH/etc/" />
+            <file src="bin/linux/" targetdir="$INSTALL_PATH/bin/" />
 			<executable targetfile="$INSTALL_PATH/bin/linux/run.sh"
 				stage="never" keep="true" />
 			<executable targetfile="$INSTALL_PATH/bin/linux/debug-run.sh"
 				stage="never" keep="true" />
-            <executable targetfile="$INSTALL_PATH/bin/linux/test-run.sh"
-                stage="never" keep="true" />
 		</pack>
 		<pack name="Windows run files" required="no" preselected="yes"
 			os="windows" installGroups="Windows">
