@@ -121,13 +121,16 @@ public class AppParser implements AppModel {
     }
 
     private URI parseURI(String s) {
-        URI url;
         try {
-            url = new URI(s);
+            URI uri = new URI(s);
+            return uri.isAbsolute() ? uri : uriFromFile(s);
         } catch (URISyntaxException e) {
-            url = new File(s).toURI();
+            return uriFromFile(s);
         }
-        return url;
+    }
+
+    private URI uriFromFile(String s) {
+        return new File(s).toURI();
     }
 
     private List<InetSocketAddress> parseAddresses(AppArgs args)

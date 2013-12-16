@@ -46,7 +46,7 @@ class AppParserTest {
         AppParser model = injector.getInstance(AppParser)
         model.parse(args)
         assert model.scriptsLocations.size() == 1
-        assert model.scriptsLocations[0] == new URI(dirA)
+        assert model.scriptsLocations[0].path.endsWith(dirA)
         assert model.profile == profile
         assert model.servers.size() == 1
         assert model.servers[0].toString() == "/$serverA"
@@ -81,8 +81,8 @@ class AppParserTest {
         ]
         AppModel model = injector.getInstance(AppParser).parse(args)
         assert model.scriptsLocations.size() == 2
-        assert model.scriptsLocations.contains(new URI(dirA))
-        assert model.scriptsLocations.contains(new URI(dirB))
+        assert model.scriptsLocations.find({ URI uri -> uri.path.endsWith(dirA) })
+        assert model.scriptsLocations.find({ URI uri -> uri.path.endsWith(dirB) })
     }
 
     @Test
