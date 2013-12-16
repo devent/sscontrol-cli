@@ -21,6 +21,7 @@ package com.anrisoftware.sscontrol.parser;
 import static org.apache.commons.lang3.StringUtils.split;
 
 import java.io.File;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -151,7 +152,7 @@ public class AppParser implements AppModel {
             throws ParseException {
         InetSocketAddress address = format.parse(s);
         if (address.getPort() == 0) {
-            String host = address.getHostString();
+            InetAddress host = address.getAddress();
             addresses.add(new InetSocketAddress(host, defaultPort));
         } else {
             addresses.add(address);
