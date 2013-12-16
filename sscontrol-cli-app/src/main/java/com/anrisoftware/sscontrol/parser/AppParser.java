@@ -27,7 +27,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,11 +44,13 @@ import com.anrisoftware.sscontrol.appmodel.ModelException;
 
 /**
  * Parses the command line.
- * 
+ *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.0
  */
 public class AppParser implements AppModel {
+
+    private static final String NOT_PREFIX = "!";
 
     @Inject
     private AppParserLogger log;
@@ -71,14 +72,16 @@ public class AppParser implements AppModel {
 
     private List<String> services;
 
+    private List<String> deactivatedServices;
+
     /**
      * Parses the specified command line arguments.
-     * 
+     *
      * @param args
      *            the command line arguments.
-     * 
+     *
      * @return the {@link AppModel}.
-     * 
+     *
      * @throws ModelException
      *             if there was an error parsing the command line arguments.
      */
@@ -98,6 +101,21 @@ public class AppParser implements AppModel {
         this.servers = parseAddresses(args);
         this.variables = parseVariables(args);
         this.services = parseServices(args);
+        this.deactivatedServices = parseDeactivatedServices(args);
+    }
+
+    private List<String> parseDeactivatedServices(AppArgs args) {
+        String[] strings = split(args.getServices(),
+                properties.getCommandLineSeparator());
+        List<String> services = new ArrayList<String>();
+        if (strings != null) {
+            for (String string : strings) {
+                if (string.startsWith(NOT_PREFIX)) {
+                    services.add(string.substring(1));
+                }
+            }
+        }
+        return services;
     }
 
     private List<String> parseServices(AppArgs args) {
@@ -105,7 +123,11 @@ public class AppParser implements AppModel {
                 properties.getCommandLineSeparator());
         List<String> services = new ArrayList<String>();
         if (strings != null) {
-            services.addAll(Arrays.asList(strings));
+            for (String string : strings) {
+                if (!string.startsWith(NOT_PREFIX)) {
+                    services.add(string);
+                }
+            }
         }
         return services;
     }
@@ -198,13 +220,21 @@ public class AppParser implements AppModel {
     }
 
     @Override
+    public List<String> getDeactivatedServices() {
+        return deactivatedServices;
+    }
+
+    @Override
     public boolean containsService(String name) {
         List<String> services = getServices();
-        if (services.size() < 1) {
-            return true;
-        } else {
-            return services.contains(name);
+        List<String> deactivated = getDeactivatedServices();
+        if (deactivated.contains(name)) {
+            return false;
         }
+        if (services.size() == 0) {
+            return true;
+        }
+        return services.contains(name);
     }
 
     @Override

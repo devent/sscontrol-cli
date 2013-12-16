@@ -154,6 +154,31 @@ class AppTest {
         assertFileContent hostnameRestartOut, hostnameRestartOut
     }
 
+    @Test
+    void "not hostname, hosts service from archive zip"() {
+        copyURLToFile profilesZip, profilesZipTmp
+        copyResourceToCommand installCommand, new File(tmpdir, "/usr/bin/aptitude")
+        copyResourceToCommand hostnameRestartCommand, new File(tmpdir, "/etc/init.d/hostname")
+
+        String profile = "ubuntu_10_04"
+        String[] args = [
+            "-scripts",
+            "file://${profilesZipTmp.absolutePath}",
+            "-profile",
+            profile,
+            "-server",
+            localServer,
+            "-variables",
+            "prefix=$variables.prefix",
+            "-services",
+            "!hostname"
+        ]
+        App app = injector.getInstance App
+        app.start args
+        assertFileContent hostsFile, hostsExpected
+        assert !hostnameRestartOut.exists()
+    }
+
     static Injector injector
 
     static String localServer = "127.0.0.1"

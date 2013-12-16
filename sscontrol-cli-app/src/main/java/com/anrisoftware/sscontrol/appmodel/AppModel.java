@@ -60,6 +60,13 @@ public interface AppModel {
     List<String> getServices();
 
     /**
+     * Returns the name of the deactivated services.
+     * 
+     * @return the {@link List} with the service names.
+     */
+    List<String> getDeactivatedServices();
+
+    /**
      * Tests if the service should be deployed.
      * 
      * @param name
