@@ -69,6 +69,11 @@
         </dependency>
         <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
+            <artifactId>sscontrol-httpd-nginx</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.anrisoftware.sscontrol</groupId>
             <artifactId>sscontrol-ldap-openldap</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
