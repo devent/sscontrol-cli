@@ -47,87 +47,87 @@ import com.google.inject.Injector;
  */
 public class ServiceLoad {
 
-	private final static String SERVICE_FILE_PATTERN = "%s\\.\\w+$";
+    private final static String SERVICE_FILE_PATTERN = "%s.*?\\.\\w+$";
 
-	private final ServiceLoadLogger log;
+    private final ServiceLoadLogger log;
 
-	private final ServiceLoaderFactory serviceFactory;
+    private final ServiceLoaderFactory serviceFactory;
 
-	@Inject
-	private Injector injector;
+    @Inject
+    private Injector injector;
 
-	private Pattern filePattern;
+    private Pattern filePattern;
 
-	@Inject
-	ServiceLoad(ServiceLoadLogger logger, ServiceLoaderFactory serviceFactory) {
-		this.log = logger;
-		this.serviceFactory = serviceFactory;
-	}
+    @Inject
+    ServiceLoad(ServiceLoadLogger logger, ServiceLoaderFactory serviceFactory) {
+        this.log = logger;
+        this.serviceFactory = serviceFactory;
+    }
 
-	/**
-	 * Search the file system for the service script file and loads the service.
-	 * 
-	 * @param name
-	 *            the name of the service.
-	 * 
-	 * @param fileSystem
-	 *            the {@link FileSystem} where to search.
-	 * 
-	 * @param registry
-	 *            the {@link ServicesRegistry} to register the profile script.
-	 * 
-	 * @param profile
-	 *            the {@link ProfileService} or {@code null} if no profile is
-	 *            set.
-	 * 
-	 * @param variables
-	 *            a {@link Map} of variables that should be injected in the
-	 *            script. The map should contain entries
-	 *            {@code [<variable name>=<value>, ...]}.
-	 * 
-	 * @return {@link ServicesRegistry} registry that will contain the loaded
-	 *         service.
-	 * 
-	 * @throws FileSystemException
-	 *             if there was error searching the profile in the file system.
-	 * 
-	 * @throws ServiceException
-	 *             if there was error loading the service script.
-	 */
-	public ServicesRegistry loadService(String name, FileSystem fileSystem,
-			ServicesRegistry registry, ProfileService profile,
-			Map<String, Object> variables) throws FileSystemException,
-			ServiceException {
-		Pattern pattern = filePattern == null ? filePattern(name) : filePattern;
-		Set<URL> files = fileSystem.findFiles(pattern);
-		if (files.isEmpty()) {
-			throw log.noServiceFilesFound(name, pattern);
-		}
-		for (URL url : files) {
-			ServiceLoader loader = serviceFactory.create(registry, variables);
-			loader.setParent(injector);
-			loader.loadService(url, profile);
-		}
-		if (!registry.getServiceNames().contains(name)) {
-			throw log.serviceFileNotContainService(name, pattern);
-		}
-		return registry;
-	}
+    /**
+     * Search the file system for the service script file and loads the service.
+     * 
+     * @param name
+     *            the name of the service.
+     * 
+     * @param fileSystem
+     *            the {@link FileSystem} where to search.
+     * 
+     * @param registry
+     *            the {@link ServicesRegistry} to register the profile script.
+     * 
+     * @param profile
+     *            the {@link ProfileService} or {@code null} if no profile is
+     *            set.
+     * 
+     * @param variables
+     *            a {@link Map} of variables that should be injected in the
+     *            script. The map should contain entries
+     *            {@code [<variable name>=<value>, ...]}.
+     * 
+     * @return {@link ServicesRegistry} registry that will contain the loaded
+     *         service.
+     * 
+     * @throws FileSystemException
+     *             if there was error searching the profile in the file system.
+     * 
+     * @throws ServiceException
+     *             if there was error loading the service script.
+     */
+    public ServicesRegistry loadService(String name, FileSystem fileSystem,
+            ServicesRegistry registry, ProfileService profile,
+            Map<String, Object> variables) throws FileSystemException,
+            ServiceException {
+        Pattern pattern = filePattern == null ? filePattern(name) : filePattern;
+        Set<URL> files = fileSystem.findFiles(pattern);
+        if (files.isEmpty()) {
+            throw log.noServiceFilesFound(name, pattern);
+        }
+        for (URL url : files) {
+            ServiceLoader loader = serviceFactory.create(registry, variables);
+            loader.setParent(injector);
+            loader.loadService(url, profile);
+        }
+        if (!registry.getServiceNames().contains(name)) {
+            throw log.serviceFileNotContainService(name, pattern);
+        }
+        return registry;
+    }
 
-	private Pattern filePattern(String name) {
-		String fileName = StringUtils.capitalize(name);
-		String regex = format(SERVICE_FILE_PATTERN, fileName);
-		return compile(regex);
-	}
+    private Pattern filePattern(String name) {
+        String fileName = StringUtils.capitalize(name);
+        String regex = format(SERVICE_FILE_PATTERN, fileName);
+        return compile(regex);
+    }
 
-	/**
-	 * Sets the file pattern for the service.
-	 * 
-	 * @param pattern
-	 *            the service file pattern.
-	 */
-	public void setFilePattern(Pattern pattern) {
-		this.filePattern = pattern;
-	}
+    /**
+     * Sets the file pattern for the service.
+     * 
+     * @param pattern
+     *            the service file pattern.
+     */
+    public void setFilePattern(Pattern pattern) {
+        this.filePattern = pattern;
+    }
 
 }

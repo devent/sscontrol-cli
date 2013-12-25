@@ -26,31 +26,35 @@ package com.anrisoftware.sscontrol.resources
  */
 class Resources {
 
-	public static final URL hostnameUbuntuProfile = Resources.class.getResource("HostnameUbuntuProfile.groovy")
+    public static final URL hostnameUbuntuProfile = Resources.class.getResource("HostnameUbuntuProfile.groovy")
 
-	public static final URL hostsHostnameUbuntuProfile = Resources.class.getResource("HostsHostnameUbuntuProfile.groovy")
+    public static final URL hostsHostnameUbuntuProfile = Resources.class.getResource("HostsHostnameUbuntuProfile.groovy")
 
-	public static final URL profilesTarGz = Resources.class.getResource("profiles.tar.gz")
+    public static final URL profilesTarGz = Resources.class.getResource("profiles.tar.gz")
 
-	public static final URL profilesZip = Resources.class.getResource("profiles.zip")
+    public static final URL profilesZip = Resources.class.getResource("profiles.zip")
 
-	public static final URL profilesJar = Resources.class.getResource("profiles.jar")
+    public static final URL profilesJar = Resources.class.getResource("profiles.jar")
 
-	public static final URL hostnameScript = Resources.class.getResource("Hostname.groovy")
+    public static final URL hostnameSecondZip = Resources.class.getResource("HostnameSecond.zip")
 
-	public static final URL hostsScript = Resources.class.getResource("Hosts.groovy")
+    public static final URL hostnameScript = Resources.class.getResource("Hostname.groovy")
 
-	public static final URL installCommand = Resources.class.getResource("echo_command.txt")
+    public static final URL hostsScript = Resources.class.getResource("Hosts.groovy")
 
-	public static final URL restartCommand = Resources.class.getResource("echo_command.txt")
+    public static final URL installCommand = Resources.class.getResource("echo_command.txt")
 
-	public static final URL hostnameRestartCommand = Resources.class.getResource("echo_command.txt")
+    public static final URL restartCommand = Resources.class.getResource("echo_command.txt")
 
-	public static final URL defaultHosts = Resources.class.getResource("hosts.txt")
+    public static final URL hostnameRestartCommand = Resources.class.getResource("echo_command.txt")
 
-	public static final URL hostsExpected = Resources.class.getResource("hosts_expected.txt")
+    public static final URL defaultHosts = Resources.class.getResource("hosts.txt")
 
-	public static final URL aptitudeOutExpected = Resources.class.getResource("aptitude_out_expected.txt")
+    public static final URL hostsExpected = Resources.class.getResource("hosts_expected.txt")
 
-	public static final URL hostnameRestartOutExpected = Resources.class.getResource("hostname_restart_out_expected.txt")
+    public static final URL aptitudeOutExpected = Resources.class.getResource("aptitude_out_expected.txt")
+
+    public static final URL aptitudeOutSecondExpected = Resources.class.getResource("aptitude_out_second_expected.txt")
+
+    public static final URL hostnameRestartOutExpected = Resources.class.getResource("hostname_restart_out_expected.txt")
 }

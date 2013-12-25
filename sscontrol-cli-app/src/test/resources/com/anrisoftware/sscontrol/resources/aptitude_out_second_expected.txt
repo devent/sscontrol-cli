@@ -1,0 +1,4 @@
+update
+install hostname
+update
+install hostname

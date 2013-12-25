@@ -16,13 +16,6 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with sscontrol-cli-app. If not, see <http://www.gnu.org/licenses/>.
  */
-package mysql.ubuntu_10_04
-database {
-	debugging true
-	bind_address "127.0.0.1"
-	admin_password "mysqladminpassword"
-	database "maildb"
-	database "phpmyadmin"
-	user "mail", password: "mailpassword", { use_database "maildb" }
-	user "phpmyadmin", password: "phpmyadminpassword", { use_database "phpmyadmin" }
-}
+package com.anrisoftware.sscontrol.resources
+
+hostname { set "test" }
