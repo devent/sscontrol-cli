@@ -19,73 +19,136 @@
 
 	<properties>
 		<project.custom.year>${project.inceptionYear}</project.custom.year>
-        <project.custom.mainclass>com.anrisoftware.sscontrol.start.Starter</project.custom.mainclass>
-        <project.custom.author.name>Erwin Müller</project.custom.author.name>
-        <project.custom.author.email>erwin.mueller@deventm.org</project.custom.author.email>
-        <project.custom.name>RoboBee</project.custom.name>
-        <project.custom.version>1.0</project.custom.version>
+		<project.custom.mainclass>com.anrisoftware.sscontrol.start.Starter</project.custom.mainclass>
+		<project.custom.author.name>Erwin Müller</project.custom.author.name>
+		<project.custom.author.email>erwin.mueller@deventm.org</project.custom.author.email>
+		<project.custom.name>RoboBee</project.custom.name>
+		<project.custom.version>1.0</project.custom.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.anrisoftware.sscontrol</groupId>
+				<artifactId>sscontrol-cli-app</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.anrisoftware.sscontrol</groupId>
+				<artifactId>sscontrol-database-mysql</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.anrisoftware.sscontrol</groupId>
+				<artifactId>sscontrol-dhclient</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.anrisoftware.sscontrol</groupId>
+				<artifactId>sscontrol-dns-maradns</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.anrisoftware.sscontrol</groupId>
+				<artifactId>sscontrol-firewall-ufw</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.anrisoftware.sscontrol</groupId>
+				<artifactId>sscontrol-hostname</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.anrisoftware.sscontrol</groupId>
+				<artifactId>sscontrol-hosts</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.anrisoftware.sscontrol</groupId>
+				<artifactId>sscontrol-httpd-apache</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.anrisoftware.sscontrol</groupId>
+				<artifactId>sscontrol-httpd-nginx</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.anrisoftware.sscontrol</groupId>
+				<artifactId>sscontrol-ldap-openldap</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.anrisoftware.sscontrol</groupId>
+				<artifactId>sscontrol-mail-postfix</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.anrisoftware.sscontrol</groupId>
+				<artifactId>sscontrol-profile</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.anrisoftware.sscontrol</groupId>
+				<artifactId>sscontrol-remoteaccess</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-cli-app</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-database-mysql</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-dhclient</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-dns-maradns</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-firewall-ufw</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-hostname</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-hosts</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
-        <dependency>
-            <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-httpd-apache</artifactId>
-            <version>1.0-SNAPSHOT</version>
+		<dependency>
+			<groupId>com.anrisoftware.sscontrol</groupId>
+			<artifactId>sscontrol-httpd-apache</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-httpd-nginx</artifactId>
-            <version>1.0-SNAPSHOT</version>
+		<dependency>
+			<groupId>com.anrisoftware.sscontrol</groupId>
+			<artifactId>sscontrol-httpd-nginx</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-ldap-openldap</artifactId>
-            <version>1.0-SNAPSHOT</version>
+		<dependency>
+			<groupId>com.anrisoftware.sscontrol</groupId>
+			<artifactId>sscontrol-ldap-openldap</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.anrisoftware.sscontrol</groupId>
-            <artifactId>sscontrol-mail-postfix</artifactId>
-            <version>1.0-SNAPSHOT</version>
+		<dependency>
+			<groupId>com.anrisoftware.sscontrol</groupId>
+			<artifactId>sscontrol-mail-postfix</artifactId>
         </dependency>
 		<dependency>
 			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-profile</artifactId>
-			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.anrisoftware.sscontrol</groupId>
+			<artifactId>sscontrol-remoteaccess</artifactId>
 		</dependency>
 	</dependencies>
+
 </project>
