@@ -105,6 +105,28 @@ class AppTest {
     }
 
     @Test
+    void "firewall Ubuntu 12.04 service"() {
+        copyURLToFile firewallUbuntu1204Tar, new File(tmpdir, "firewall_ubuntu_12_04.tar.gz")
+        copyResourceToCommand installCommand, new File(tmpdir, "/usr/bin/aptitude")
+        copyResourceToCommand hostnameRestartCommand, new File(tmpdir, "/etc/init.d/hostname")
+        copyResourceToCommand ufwCommand, new File(tmpdir, "/usr/sbin/ufw")
+
+        String profile = "ubuntu_12_04"
+        String[] args = [
+            "-scripts",
+            "file://${tmpdir.absolutePath}/firewall_ubuntu_12_04.tar.gz",
+            "-profile",
+            profile,
+            "-server",
+            localServer,
+            "-variables",
+            "prefix=$variables.prefix"
+        ]
+        App app = injector.getInstance App
+        app.start args
+    }
+
+    @Test
     void "hostname, hosts service from archive zip"() {
         copyURLToFile profilesZip, profilesZipTmp
         copyResourceToCommand installCommand, new File(tmpdir, "/usr/bin/aptitude")

@@ -1,22 +1,24 @@
 /*
  * Copyright 2013 Erwin Müller <erwin.mueller@deventm.org>
- * 
+ *
  * This file is part of sscontrol-cli-app.
- * 
+ *
  * sscontrol-cli-app is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Affero General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * sscontrol-cli-app is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU Affero General Public License
  * along with sscontrol-cli-app. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.anrisoftware.sscontrol.app;
+
+import static com.anrisoftware.sscontrol.app.AppLogger._.start_service;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -42,7 +44,7 @@ import com.anrisoftware.sscontrol.filesystem.FileSystemException;
 @Singleton
 class AppLogger extends AbstractLogger {
 
-	private enum _ {
+    enum _ {
 
 		ERROR_LOAD_SERVICE2("error_load_service_message"),
 
@@ -92,7 +94,9 @@ class AppLogger extends AbstractLogger {
 
 		FINSISH_SERVICE("finsish_service"),
 
-		SERVICE("service");
+        SERVICE("service"),
+
+        start_service("start_service");
 
 		public static void retrieveResources(Texts texts) {
 			for (_ value : values()) {
@@ -182,4 +186,8 @@ class AppLogger extends AbstractLogger {
 	void finishService(String name) {
 		log.info(_.FINSISH_SERVICE.text, name);
 	}
+
+    void startService(Service service) {
+        trace(start_service, service);
+    }
 }

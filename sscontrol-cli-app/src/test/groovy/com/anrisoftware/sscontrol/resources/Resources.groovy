@@ -38,6 +38,8 @@ class Resources {
 
     public static final URL hostnameSecondZip = Resources.class.getResource("HostnameSecond.zip")
 
+    public static final URL firewallUbuntu1204Tar = Resources.class.getResource("firewall_ubuntu_12_04.tar.gz")
+
     public static final URL hostnameScript = Resources.class.getResource("Hostname.groovy")
 
     public static final URL hostsScript = Resources.class.getResource("Hosts.groovy")
@@ -47,6 +49,8 @@ class Resources {
     public static final URL restartCommand = Resources.class.getResource("echo_command.txt")
 
     public static final URL hostnameRestartCommand = Resources.class.getResource("echo_command.txt")
+
+    public static final URL ufwCommand = Resources.class.getResource("echo_command.txt")
 
     public static final URL defaultHosts = Resources.class.getResource("hosts.txt")
 

@@ -98,6 +98,7 @@ public class App {
 
     private void startService(Service service) throws AppException {
         try {
+            log.startService(service);
             String name = service.getName();
             service.call();
             log.finishService(name);
