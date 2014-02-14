@@ -34,6 +34,7 @@ import com.anrisoftware.sscontrol.core.api.ProfileService;
 import com.anrisoftware.sscontrol.core.api.ServiceException;
 import com.anrisoftware.sscontrol.core.api.ServiceLoader;
 import com.anrisoftware.sscontrol.core.api.ServiceLoaderFactory;
+import com.anrisoftware.sscontrol.core.api.ServicePreScript;
 import com.anrisoftware.sscontrol.core.api.ServicesRegistry;
 import com.anrisoftware.sscontrol.filesystem.FileSystem;
 import com.anrisoftware.sscontrol.filesystem.FileSystemException;
@@ -55,6 +56,9 @@ public class ServiceLoad {
 
     @Inject
     private Injector injector;
+
+    @Inject
+    private PreScriptServicesProvider preScriptServices;
 
     private Pattern filePattern;
 
@@ -104,14 +108,21 @@ public class ServiceLoad {
             throw log.noServiceFilesFound(name, pattern);
         }
         for (URL url : files) {
+            ServicePreScript prescript = loadPreScript(name, profile);
             ServiceLoader loader = serviceFactory.create(registry, variables);
             loader.setParent(injector);
-            loader.loadService(url, profile);
+            loader.loadService(url, profile, prescript);
         }
         if (!registry.getServiceNames().contains(name)) {
             throw log.serviceFileNotContainService(name, pattern);
         }
         return registry;
+    }
+
+    private ServicePreScript loadPreScript(String name, ProfileService profile)
+            throws ServiceException {
+        return preScriptServices.findServiceFactory(name, profile)
+                .getPreScript();
     }
 
     private Pattern filePattern(String name) {
