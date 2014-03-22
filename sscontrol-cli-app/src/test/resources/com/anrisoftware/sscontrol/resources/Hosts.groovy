@@ -19,6 +19,6 @@
 package com.anrisoftware.sscontrol.resources
 
 hosts {
-	ip "192.168.0.49" host "srv1.ubuntutest.com" alias "srv1"
-	ip "192.168.0.50" host "srv1.ubuntutest.org" alias "srva", "srvb"
+    ip "192.168.0.49", host: "srv1.ubuntutest.com", alias: "srv1"
+    ip "192.168.0.50", host: "srv1.ubuntutest.org", alias: "srva, srvb"
 }

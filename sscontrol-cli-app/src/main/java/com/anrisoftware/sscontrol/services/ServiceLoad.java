@@ -35,6 +35,7 @@ import com.anrisoftware.sscontrol.core.api.ServiceException;
 import com.anrisoftware.sscontrol.core.api.ServiceLoader;
 import com.anrisoftware.sscontrol.core.api.ServiceLoaderFactory;
 import com.anrisoftware.sscontrol.core.api.ServicePreScript;
+import com.anrisoftware.sscontrol.core.api.ServicePreScriptFactory;
 import com.anrisoftware.sscontrol.core.api.ServicesRegistry;
 import com.anrisoftware.sscontrol.filesystem.FileSystem;
 import com.anrisoftware.sscontrol.filesystem.FileSystemException;
@@ -121,8 +122,9 @@ public class ServiceLoad {
 
     private ServicePreScript loadPreScript(String name, ProfileService profile)
             throws ServiceException {
-        return preScriptServices.findServiceFactory(name, profile)
-                .getPreScript();
+        ServicePreScriptFactory factory = preScriptServices.findServiceFactory(
+                name, profile);
+        return factory == null ? null : factory.getPreScript();
     }
 
     private Pattern filePattern(String name) {
