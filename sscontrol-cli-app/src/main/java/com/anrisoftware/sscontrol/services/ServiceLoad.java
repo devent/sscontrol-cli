@@ -122,9 +122,14 @@ public class ServiceLoad {
 
     private ServicePreScript loadPreScript(String name, ProfileService profile)
             throws ServiceException {
-        ServicePreScriptFactory factory = preScriptServices.findServiceFactory(
-                name, profile);
-        return factory == null ? null : factory.getPreScript();
+        ServicePreScriptFactory factory;
+        factory = preScriptServices.findServiceFactory(name, profile);
+        if (factory != null) {
+            factory.setParent(injector);
+            return factory.getPreScript();
+        } else {
+            return null;
+        }
     }
 
     private Pattern filePattern(String name) {
