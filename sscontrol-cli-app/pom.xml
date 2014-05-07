@@ -33,6 +33,11 @@
 			<artifactId>sscontrol-hosts</artifactId>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+            <groupId>com.anrisoftware.sscontrol</groupId>
+            <artifactId>sscontrol-firewall-ufw</artifactId>
+            <scope>test</scope>
+        </dependency>
 
 		<!-- sscontrol dependencies -->
 		<dependency>
@@ -51,7 +56,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.anrisoftware.globalpom</groupId>
-			<artifactId>globalpom-utils</artifactId>
+			<artifactId>globalpomutils-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -90,12 +95,6 @@
 		<dependency>
 			<groupId>com.anrisoftware.globalpom</groupId>
 			<artifactId>globalpom-log</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.anrisoftware.sscontrol</groupId>
-			<artifactId>sscontrol-firewall-ufw</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
