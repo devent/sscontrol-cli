@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
+import com.anrisoftware.globalpom.threads.api.Threads;
 import com.anrisoftware.sscontrol.core.api.ProfileService;
 import com.anrisoftware.sscontrol.core.api.Service;
 import com.anrisoftware.sscontrol.core.api.ServiceException;
@@ -42,76 +43,79 @@ import com.anrisoftware.sscontrol.filesystem.FileSystemException;
  */
 public class ProfileSearch {
 
-	public final static Pattern PROFILE_FILE_PATTERN = compile(".+Profile\\.\\w+$");
+    private static final String PROFILE_NAME = "profile";
 
-	@Inject
-	private ServiceLoad serviceLoad;
+    public final static Pattern PROFILE_FILE_PATTERN = compile(".+Profile\\.\\w+$");
 
-	/**
-	 * Search the profile script in the file system.
-	 * 
-	 * @param profileName
-	 *            the name of the profile.
-	 * 
-	 * @param fileSystem
-	 *            the {@link FileSystem} where to search.
-	 * 
-	 * @param registry
-	 *            the {@link ServicesRegistry} to register the profile script.
-	 * 
-	 * @return the found {@link ProfileService} profile or {@code null} if no
-	 *         such profile was found.
-	 * 
-	 * @throws FileSystemException
-	 *             if there was error searching the profile in the file system.
-	 * 
-	 * @throws ServiceException
-	 *             if there was error loading the profile script.
-	 */
-	public ProfileService searchProfile(String profileName,
-			FileSystem fileSystem, ServicesRegistry registry)
-			throws FileSystemException, ServiceException {
-		return searchProfile(profileName, fileSystem, registry,
-				Collections.<String, Object> emptyMap());
-	}
+    @Inject
+    private ServiceLoad serviceLoad;
 
-	/**
-	 * Search the profile script in the file system.
-	 * 
-	 * @param name
-	 *            the name of the profile.
-	 * 
-	 * @param fileSystem
-	 *            the {@link FileSystem} where to search.
-	 * 
-	 * @param registry
-	 *            the {@link ServicesRegistry} to register the profile script.
-	 * 
-	 * @param variables
-	 *            a {@link Map} of variables to pass to the profile script.
-	 * 
-	 * @return the found {@link ProfileService} profile or {@code null} if no
-	 *         such profile was found.
-	 * 
-	 * @throws FileSystemException
-	 *             if there was error searching the profile in the file system.
-	 * 
-	 * @throws ServiceException
-	 *             if there was error loading the profile script.
-	 */
-	public ProfileService searchProfile(String name, FileSystem fileSystem,
-			ServicesRegistry registry, Map<String, Object> variables)
-			throws FileSystemException, ServiceException {
-		serviceLoad.setFilePattern(PROFILE_FILE_PATTERN);
-		serviceLoad.loadService("profile", fileSystem, registry, null,
-				variables);
-		List<Service> profiles = registry.getService("profile");
-		for (Service service : profiles) {
-			ProfileService profile = (ProfileService) service;
-			if (profile.getProfileName().equals(name)) {
-				return profile;
-			}
-		}
-		return null;
-	}
+    private ServicesRegistry registry;
+
+    public void setFileSystem(FileSystem fileSystem) {
+        serviceLoad.setFileSystem(fileSystem);
+    }
+
+    public void setRegistry(ServicesRegistry registry) {
+        this.registry = registry;
+        serviceLoad.setRegistry(registry);
+    }
+
+    public void setThreads(Threads threads) {
+        serviceLoad.setThreads(threads);
+    }
+
+    /**
+     * Search the profile script in the file system.
+     * 
+     * @param profileName
+     *            the name of the profile.
+     * 
+     * @return the found {@link ProfileService} profile or {@code null} if no
+     *         such profile was found.
+     * 
+     * @throws FileSystemException
+     *             if there was error searching the profile in the file system.
+     * 
+     * @throws ServiceException
+     *             if there was error loading the profile script.
+     */
+    public ProfileService searchProfile(String profileName)
+            throws FileSystemException, ServiceException {
+        return searchProfile(profileName,
+                Collections.<String, Object> emptyMap());
+    }
+
+    /**
+     * Search the profile script in the file system.
+     * 
+     * @param name
+     *            the name of the profile.
+     * 
+     * @param variables
+     *            a {@link Map} of variables to pass to the profile script.
+     * 
+     * @return the found {@link ProfileService} profile or {@code null} if no
+     *         such profile was found.
+     * 
+     * @throws FileSystemException
+     *             if there was error searching the profile in the file system.
+     * 
+     * @throws ServiceException
+     *             if there was error loading the profile script.
+     */
+    public ProfileService searchProfile(String name,
+            Map<String, Object> variables) throws FileSystemException,
+            ServiceException {
+        serviceLoad.setFilePattern(PROFILE_FILE_PATTERN);
+        serviceLoad.loadService(PROFILE_NAME, null, variables);
+        List<Service> profiles = registry.getService(PROFILE_NAME);
+        for (Service service : profiles) {
+            ProfileService profile = (ProfileService) service;
+            if (profile.getProfileName().equals(name)) {
+                return profile;
+            }
+        }
+        return null;
+    }
 }

@@ -30,6 +30,7 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.anrisoftware.globalpom.threads.api.Threads;
 import com.anrisoftware.sscontrol.core.api.ProfileService;
 import com.anrisoftware.sscontrol.core.api.ServiceException;
 import com.anrisoftware.sscontrol.core.api.ServiceLoader;
@@ -63,6 +64,12 @@ public class ServiceLoad {
 
     private Pattern filePattern;
 
+    private FileSystem fileSystem;
+
+    private ServicesRegistry registry;
+
+    private Threads threads;
+
     @Inject
     ServiceLoad(ServiceLoadLogger logger, ServiceLoaderFactory serviceFactory) {
         this.log = logger;
@@ -74,12 +81,6 @@ public class ServiceLoad {
      * 
      * @param name
      *            the name of the service.
-     * 
-     * @param fileSystem
-     *            the {@link FileSystem} where to search.
-     * 
-     * @param registry
-     *            the {@link ServicesRegistry} to register the profile script.
      * 
      * @param profile
      *            the {@link ProfileService} or {@code null} if no profile is
@@ -99,8 +100,7 @@ public class ServiceLoad {
      * @throws ServiceException
      *             if there was error loading the service script.
      */
-    public ServicesRegistry loadService(String name, FileSystem fileSystem,
-            ServicesRegistry registry, ProfileService profile,
+    public ServicesRegistry loadService(String name, ProfileService profile,
             Map<String, Object> variables) throws FileSystemException,
             ServiceException {
         Pattern pattern = filePattern == null ? filePattern(name) : filePattern;
@@ -112,6 +112,7 @@ public class ServiceLoad {
             ServicePreScript prescript = loadPreScript(name, profile);
             ServiceLoader loader = serviceFactory.create(registry, variables);
             loader.setParent(injector);
+            loader.setThreads(threads);
             loader.loadService(url, profile, prescript);
         }
         if (!registry.getServiceNames().contains(name)) {
@@ -146,6 +147,18 @@ public class ServiceLoad {
      */
     public void setFilePattern(Pattern pattern) {
         this.filePattern = pattern;
+    }
+
+    public void setFileSystem(FileSystem fileSystem) {
+        this.fileSystem = fileSystem;
+    }
+
+    public void setRegistry(ServicesRegistry registry) {
+        this.registry = registry;
+    }
+
+    public void setThreads(Threads threads) {
+        this.threads = threads;
     }
 
 }

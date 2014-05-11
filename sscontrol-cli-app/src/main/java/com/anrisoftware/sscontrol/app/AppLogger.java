@@ -18,16 +18,47 @@
  */
 package com.anrisoftware.sscontrol.app;
 
+import static com.anrisoftware.sscontrol.app.AppLogger._.arguments;
+import static com.anrisoftware.sscontrol.app.AppLogger._.error_add_location;
+import static com.anrisoftware.sscontrol.app.AppLogger._.error_add_location_message;
+import static com.anrisoftware.sscontrol.app.AppLogger._.error_create_threads;
+import static com.anrisoftware.sscontrol.app.AppLogger._.error_create_threads_message;
+import static com.anrisoftware.sscontrol.app.AppLogger._.error_load_profile_message;
+import static com.anrisoftware.sscontrol.app.AppLogger._.error_load_service;
+import static com.anrisoftware.sscontrol.app.AppLogger._.error_load_service_message;
+import static com.anrisoftware.sscontrol.app.AppLogger._.error_parse_arguments;
+import static com.anrisoftware.sscontrol.app.AppLogger._.error_parse_arguments_message;
+import static com.anrisoftware.sscontrol.app.AppLogger._.error_search_profile;
+import static com.anrisoftware.sscontrol.app.AppLogger._.error_search_profile_message;
+import static com.anrisoftware.sscontrol.app.AppLogger._.error_search_service;
+import static com.anrisoftware.sscontrol.app.AppLogger._.error_search_service_message;
+import static com.anrisoftware.sscontrol.app.AppLogger._.error_start_service;
+import static com.anrisoftware.sscontrol.app.AppLogger._.error_start_service_message;
+import static com.anrisoftware.sscontrol.app.AppLogger._.error_wait;
+import static com.anrisoftware.sscontrol.app.AppLogger._.error_wait_message;
+import static com.anrisoftware.sscontrol.app.AppLogger._.finsish_service;
+import static com.anrisoftware.sscontrol.app.AppLogger._.location_url;
+import static com.anrisoftware.sscontrol.app.AppLogger._.location_url_message;
+import static com.anrisoftware.sscontrol.app.AppLogger._.locations;
+import static com.anrisoftware.sscontrol.app.AppLogger._.no_profile;
+import static com.anrisoftware.sscontrol.app.AppLogger._.no_profile_message;
+import static com.anrisoftware.sscontrol.app.AppLogger._.owerdue_task;
+import static com.anrisoftware.sscontrol.app.AppLogger._.profile_name;
+import static com.anrisoftware.sscontrol.app.AppLogger._.service_name;
 import static com.anrisoftware.sscontrol.app.AppLogger._.start_service;
+import static com.anrisoftware.sscontrol.app.AppLogger._.threads_name;
 
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.util.Arrays;
+import java.util.concurrent.Future;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import com.anrisoftware.globalpom.log.AbstractLogger;
+import com.anrisoftware.globalpom.threads.api.ThreadsException;
+import com.anrisoftware.resources.texts.api.TextResource;
 import com.anrisoftware.resources.texts.api.Texts;
 import com.anrisoftware.sscontrol.appmodel.AppModel;
 import com.anrisoftware.sscontrol.appmodel.ModelException;
@@ -46,148 +77,181 @@ class AppLogger extends AbstractLogger {
 
     enum _ {
 
-		ERROR_LOAD_SERVICE2("error_load_service_message"),
+        error_load_service_message,
 
-		ERROR_LOAD_SERVICE("error_load_service"),
+        error_load_service,
 
-		ERROR_SEARCH_SERVICE2("error_search_service_message"),
+        error_search_service_message,
 
-		ERROR_SEARCH_SERVICE("error_search_service"),
+        error_search_service,
 
-		SERVICE_NAME("service_name"),
+        service_name,
 
-		NO_PROFILE2("no_profile_message"),
+        no_profile_message,
 
-		LOCATIONS("locations"),
+        locations,
 
-		NO_PROFILE("no_profile"),
+        no_profile,
 
-		ARGUMENTS("arguments"),
+        arguments,
 
-		ERROR_PARSE_ARGUMENTS2("error_parse_arguments_message"),
+        error_parse_arguments_message,
 
-		ERROR_PARSE_ARGUMENTS("error_parse_arguments"),
+        error_parse_arguments,
 
-		ERROR_LOAD_PROFILE2("error_load_profile_message"),
+        error_load_profile_message,
 
-		ERROR_LOAD_PROFILE("error_load_profile"),
+        error_load_profile,
 
-		PROFILE_NAME("profile_name"),
+        profile_name,
 
-		ERROR_SEARCH_PROFILE2("error_search_profile_message"),
+        error_search_profile_message,
 
-		ERROR_SEARCH_PROFILE("error_search_profile"),
+        error_search_profile,
 
-		LOCATION("location"),
+        location,
 
-		LOCATION_URL2("location_url_message"),
+        location_url_message,
 
-		LOCATION_URL("location_url"),
+        location_url,
 
-		ERROR_START_SERVICE("error_start_service"),
+        error_start_service,
 
-		ERROR_START_SERVICE2("error_start_service_message"),
+        error_start_service_message,
 
-		ERROR_ADD_LOCATION("error_add_location"),
+        error_add_location,
 
-		ERROR_ADD_LOCATION2("error_add_location_message"),
+        error_add_location_message,
 
-		FINSISH_SERVICE("finsish_service"),
+        finsish_service,
 
-        SERVICE("service"),
+        service,
 
-        start_service("start_service");
+        start_service,
 
-		public static void retrieveResources(Texts texts) {
-			for (_ value : values()) {
-				value.setText(texts);
-			}
-		}
+        error_create_threads,
 
-		private String name;
+        threads_name,
 
-		private String text;
+        error_create_threads_message,
 
-		private _(String name) {
-			this.name = name;
-		}
+        error_wait,
 
-		public void setText(Texts texts) {
-			this.text = texts.getResource(name).getText();
-		}
+        error_wait_message,
 
-		@Override
-		public String toString() {
-			return text;
-		}
-	}
+        owerdue_task,
 
-	/**
-	 * Create logger for {@link App}.
-	 */
-	public AppLogger() {
-		super(App.class);
-	}
+        stopped_threads;
 
-	@Inject
-	void setTexts(TextsProvider provider) {
-		_.retrieveResources(provider.get());
-	}
+        public static void retrieveResources(Texts texts) {
+            for (_ value : values()) {
+                value.setResource(texts.getResource(value.name()));
+            }
+        }
 
-	AppException errorSearchProfile(String name, FileSystemException e) {
-		return logException(new AppException(_.ERROR_SEARCH_PROFILE, e).add(
-				_.PROFILE_NAME, name), _.ERROR_SEARCH_PROFILE2, name);
-	}
+        private TextResource resource;
 
-	ServiceException errorLoadProfile(String name, ServiceException e) {
-		return logException(e, _.ERROR_LOAD_PROFILE2, name);
-	}
+        public void setResource(TextResource resource) {
+            this.resource = resource;
+        }
 
-	AppException errorParseArguments(String[] args, ModelException e) {
-		String argsstr = Arrays.toString(args);
-		return logException(new AppException(_.ERROR_PARSE_ARGUMENTS, e).add(
-				_.ARGUMENTS, argsstr), _.ERROR_PARSE_ARGUMENTS2, argsstr);
-	}
+        public TextResource getResource() {
+            return resource;
+        }
 
-	AppException noProfileFound(AppModel model) {
-		String profile = model.getProfile();
-		return logException(
-				new AppException(_.NO_PROFILE).add(_.PROFILE_NAME, profile)
-						.add(_.LOCATIONS, model.getScriptsLocations()),
-				_.NO_PROFILE2, profile);
-	}
+        @Override
+        public String toString() {
+            return resource.getText();
+        }
+    }
 
-	AppException errorSearchService(String name, FileSystemException e) {
-		return logException(new AppException(_.ERROR_SEARCH_SERVICE, e).add(
-				_.SERVICE_NAME, name), _.ERROR_SEARCH_SERVICE2, name);
-	}
+    /**
+     * Create logger for {@link App}.
+     */
+    public AppLogger() {
+        super(App.class);
+    }
 
-	AppException errorLoadService(String name, ServiceException e) {
-		return logException(new AppException(_.ERROR_LOAD_SERVICE, e).add(
-				_.SERVICE_NAME, name), _.ERROR_LOAD_SERVICE2, name);
-	}
+    @Inject
+    void setTexts(TextsProvider provider) {
+        _.retrieveResources(provider.get());
+    }
 
-	AppException errorStartService(Exception e, Service service) {
-		return logException(new AppException(_.ERROR_START_SERVICE, e).add(
-				_.SERVICE, service), _.ERROR_START_SERVICE2, service.getName());
-	}
+    AppException errorSearchProfile(String name, FileSystemException e) {
+        return logException(new AppException(error_search_profile, e).add(
+                profile_name, name), error_search_profile_message, name);
+    }
 
-	AppException errorAddLocation(URI location, FileSystemException e) {
-		return logException(new AppException(_.ERROR_ADD_LOCATION, e).add(
-				_.LOCATION, location), _.ERROR_ADD_LOCATION2, location);
-	}
+    ServiceException errorLoadProfile(String name, ServiceException e) {
+        return logException(e, error_load_profile_message, name);
+    }
 
-	AppException malformedLocation(URI location, MalformedURLException e) {
-		return logException(
-				new AppException(_.LOCATION_URL, e).add(_.LOCATION, location),
-				_.LOCATION_URL2, location);
-	}
+    AppException errorParseArguments(String[] args, ModelException e) {
+        String argsstr = Arrays.toString(args);
+        return logException(new AppException(error_parse_arguments, e).add(
+                arguments, argsstr), error_parse_arguments_message, argsstr);
+    }
 
-	void finishService(String name) {
-		log.info(_.FINSISH_SERVICE.text, name);
-	}
+    AppException noProfileFound(AppModel model) {
+        String profile = model.getProfile();
+        return logException(
+                new AppException(no_profile).add(profile_name, profile).add(
+                        locations, model.getScriptsLocations()),
+                no_profile_message, profile);
+    }
+
+    AppException errorSearchService(String name, FileSystemException e) {
+        return logException(new AppException(error_search_service, e).add(
+                service_name, name), error_search_service_message, name);
+    }
+
+    AppException errorLoadService(String name, ServiceException e) {
+        return logException(
+                new AppException(error_load_service, e).add(service_name, name),
+                error_load_service_message, name);
+    }
+
+    AppException errorStartService(Exception e, Service service) {
+        return logException(
+                new AppException(error_start_service, e).add(service, service),
+                error_start_service_message, service.getName());
+    }
+
+    AppException errorAddLocation(URI location, FileSystemException e) {
+        return logException(
+                new AppException(error_add_location, e).add(location, location),
+                error_add_location_message, location);
+    }
+
+    AppException malformedLocation(URI location, MalformedURLException e) {
+        return logException(
+                new AppException(location_url, e).add(location, location),
+                location_url_message, location);
+    }
+
+    AppException errorCreateThreads(ThreadsException e, String name) {
+        return logException(new AppException(error_create_threads, e).add(
+                threads_name, name), error_create_threads_message, name);
+    }
+
+    AppException errorWaitForTasks(InterruptedException e) {
+        return logException(new AppException(error_wait, e), error_wait_message);
+    }
+
+    void finishService(String name) {
+        info(finsish_service, name);
+    }
 
     void startService(Service service) {
         trace(start_service, service);
     }
+
+    void owerdueTasks(Future<?> future) {
+        debug(owerdue_task, future);
+    }
+
+    void stoppedThreads() {
+        debug(_.stopped_threads);
+    }
+
 }

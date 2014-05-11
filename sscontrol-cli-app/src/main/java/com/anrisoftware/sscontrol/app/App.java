@@ -18,18 +18,27 @@
  */
 package com.anrisoftware.sscontrol.app;
 
+import static org.joda.time.Duration.standardSeconds;
+
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 
 import javax.inject.Inject;
 
+import com.anrisoftware.globalpom.threads.api.Threads;
+import com.anrisoftware.globalpom.threads.api.ThreadsException;
+import com.anrisoftware.globalpom.threads.properties.PropertiesThreads;
+import com.anrisoftware.globalpom.threads.properties.PropertiesThreadsFactory;
 import com.anrisoftware.sscontrol.appmodel.AppModel;
 import com.anrisoftware.sscontrol.appmodel.ModelException;
 import com.anrisoftware.sscontrol.core.api.ProfileService;
 import com.anrisoftware.sscontrol.core.api.Service;
 import com.anrisoftware.sscontrol.core.api.ServiceException;
 import com.anrisoftware.sscontrol.core.api.ServicesRegistry;
+import com.anrisoftware.sscontrol.core.service.ThreadsPropertiesProvider;
 import com.anrisoftware.sscontrol.filesystem.FileSystem;
 import com.anrisoftware.sscontrol.filesystem.FileSystemException;
 import com.anrisoftware.sscontrol.parser.AppParser;
@@ -39,7 +48,7 @@ import com.anrisoftware.sscontrol.services.ServiceLoad;
 /**
  * Parse command line arguments, search for specified profile and deploy the
  * service scripts.
- * 
+ *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.0
  */
@@ -63,16 +72,24 @@ public class App {
     @Inject
     private ServiceLoad serviceLoad;
 
+    @Inject
+    private ThreadsPropertiesProvider threadsPropertiesProvider;
+
+    @Inject
+    private PropertiesThreadsFactory threadsFactory;
+
+    private Threads threads;
+
     private AppModel model;
 
     private ProfileService profile;
 
     /**
      * Parses the command line arguments and starts the services.
-     * 
+     *
      * @param args
      *            the command line arguments.
-     * 
+     *
      * @throws AppException
      *             if an error occurred that causes the application to
      *             terminate.
@@ -81,8 +98,36 @@ public class App {
         model = parseArguments(args);
         setupLocations();
         profile = searchProfile();
+        threads = createThreads();
         loadServices();
         startServices();
+        stopThreads();
+    }
+
+    private Threads createThreads() throws AppException {
+        String threadsName = "script";
+        try {
+            PropertiesThreads threads = threadsFactory.create();
+            threads.setProperties(threadsPropertiesProvider.get());
+            threads.setName(threadsName);
+            return threads;
+        } catch (ThreadsException e) {
+            throw log.errorCreateThreads(e, threadsName);
+        }
+    }
+
+    private void stopThreads() throws AppException {
+        try {
+            List<Future<?>> tasks = threads.waitForTasks(standardSeconds(1));
+            for (Future<?> future : tasks) {
+                log.owerdueTasks(future);
+                future.cancel(true);
+            }
+        } catch (InterruptedException e) {
+            throw log.errorWaitForTasks(e);
+        }
+        threads.shutdown();
+        log.stoppedThreads();
     }
 
     private void startServices() throws AppException {
@@ -108,6 +153,9 @@ public class App {
     }
 
     private void loadServices() throws AppException {
+        serviceLoad.setFileSystem(fileSystem);
+        serviceLoad.setRegistry(registry);
+        serviceLoad.setThreads(threads);
         for (String name : profile.getEntryNames()) {
             if ("system".equals(name)) {
                 continue;
@@ -117,8 +165,7 @@ public class App {
             }
             try {
                 Map<String, Object> variables = model.getScriptVariables();
-                serviceLoad.loadService(name, fileSystem, registry, profile,
-                        variables);
+                serviceLoad.loadService(name, profile, variables);
             } catch (FileSystemException e) {
                 throw log.errorSearchService(name, e);
             } catch (ServiceException e) {
@@ -131,9 +178,11 @@ public class App {
         String name = model.getProfile();
         Map<String, Object> variables = model.getScriptVariables();
         ProfileService profile = null;
+        profileSearch.setFileSystem(fileSystem);
+        profileSearch.setRegistry(registry);
+        profileSearch.setThreads(threads);
         try {
-            profile = profileSearch.searchProfile(name, fileSystem, registry,
-                    variables);
+            profile = profileSearch.searchProfile(name, variables);
         } catch (FileSystemException e) {
             throw log.errorSearchProfile(name, e);
         } catch (ServiceException e) {
