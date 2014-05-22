@@ -118,7 +118,15 @@
 		</dependency>
 		<dependency>
 			<groupId>com.anrisoftware.sscontrol</groupId>
+			<artifactId>sscontrol-database-mysql</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-dhclient</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.anrisoftware.sscontrol</groupId>
+			<artifactId>sscontrol-dns-maradns</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.anrisoftware.sscontrol</groupId>
