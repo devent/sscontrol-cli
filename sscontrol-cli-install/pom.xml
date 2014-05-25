@@ -140,6 +140,14 @@
 			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-hosts</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.anrisoftware.sscontrol</groupId>
+			<artifactId>sscontrol-mail-postfix</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.anrisoftware.sscontrol</groupId>
+			<artifactId>sscontrol-remoteaccess</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>
