@@ -148,6 +148,10 @@
 			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-remoteaccess</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>com.anrisoftware.sscontrol</groupId>
+            <artifactId>sscontrol-security</artifactId>
+        </dependency>
 	</dependencies>
 
 </project>
