@@ -138,16 +138,20 @@
 		</dependency>
         <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
+            <artifactId>sscontrol-hosts</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.anrisoftware.sscontrol</groupId>
             <artifactId>sscontrol-httpd-apache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.anrisoftware.sscontrol</groupId>
+            <artifactId>sscontrol-httpd-gitit</artifactId>
         </dependency>
         <dependency>
             <groupId>com.anrisoftware.sscontrol</groupId>
             <artifactId>sscontrol-httpd-nginx</artifactId>
         </dependency>
-		<dependency>
-			<groupId>com.anrisoftware.sscontrol</groupId>
-			<artifactId>sscontrol-hosts</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-mail-postfix</artifactId>
