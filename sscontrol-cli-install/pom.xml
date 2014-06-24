@@ -85,6 +85,11 @@
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
+				<artifactId>sscontrol-httpd-redmine</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-httpd-webservice</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
@@ -160,6 +165,10 @@
 		<dependency>
 			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-httpd-piwik</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.anrisoftware.sscontrol</groupId>
+			<artifactId>sscontrol-httpd-redmine</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.anrisoftware.sscontrol</groupId>
