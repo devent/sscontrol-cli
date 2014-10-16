@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>sscontrol-cli-app</artifactId>
-	<name>Robo Bee :: Command Line Client :: Application</name>
+	<name>RoboBee :: Command Line Client :: Application</name>
 	<description>The command line client application.</description>
 	<inceptionYear>2013</inceptionYear>
 
