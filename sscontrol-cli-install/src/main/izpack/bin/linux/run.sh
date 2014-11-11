@@ -1,21 +1,21 @@
-#!/bin/bash
+#!/bin/sh
 #
-# Copyright 2011-2013 Erwin Müller <erwin.mueller@deventm.org>
+# Copyright 2013-2014 Erwin Müller <erwin.mueller@deventm.org>
 #
-# This file is part of globalpom-izpack.
+# This file is part of sscontrol-cli-install.
 #
-# globalpom-izpack is free software: you can redistribute it and/or modify it
-# under the terms of the GNU Lesser General Public License as published by the
+# sscontrol-cli-install is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Affero General Public License as published by the
 # Free Software Foundation, either version 3 of the License, or (at your
 # option) any later version.
 #
-# globalpom-izpack is distributed in the hope that it will be useful, but
+# sscontrol-cli-install is distributed in the hope that it will be useful, but
 # WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-# details.
+# FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
+# for more details.
 #
-# You should have received a copy of the GNU Lesser General Public License
-# along with globalpom-izpack. If not, see <http://www.gnu.org/licenses/>.
+# You should have received a copy of the GNU Affero General Public License
+# along with sscontrol-cli-install. If not, see <http://www.gnu.org/licenses/>.
 #
 
 ## change the directory to the start directory of the application.
@@ -49,11 +49,12 @@ function checkJavaRuntime() {
 
 changeBinDirectory
 javaCommand=`type -P java`
-mainClass="${project.custom.mainclass}"
+mainClass="${project.custom.app.mainclass}"
 lib="../../lib/*"
 IFS='.' read -a lang <<< "$LANG"
 log="-Dlogback.configurationFile=file:///$PWD/../../etc/logback.xml"
+args=""
 noJavaRuntimeText="No Java Runtime found."
 checkJavaRuntime
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
-"$javaCommand" "$log" -cp "$lib" "$mainClass" $*
+"$javaCommand" "$log" -cp "$lib" "$mainClass" $args $*

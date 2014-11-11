@@ -1,48 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright 2011-2013 Erwin Müller <erwin.mueller@deventm.org>
+    Copyright 2013-2014 Erwin Müller <erwin.mueller@deventm.org>
 
-    This file is part of globalpom-izpack.
+    This file is part of sscontrol-cli-install.
 
-    globalpom-izpack is free software: you can redistribute it and/or modify it
-    under the terms of the GNU Lesser General Public License as published by the
+    sscontrol-cli-install is free software: you can redistribute it and/or modify it
+    under the terms of the GNU Affero General Public License as published by the
     Free Software Foundation, either version 3 of the License, or (at your
     option) any later version.
 
-    globalpom-izpack is distributed in the hope that it will be useful, but
+    sscontrol-cli-install is distributed in the hope that it will be useful, but
     WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-    FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-    details.
+    FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
+    for more details.
 
-    You should have received a copy of the GNU Lesser General Public License
-    along with globalpom-izpack. If not, see <http://www.gnu.org/licenses/>.
+    You should have received a copy of the GNU Affero General Public License
+    along with sscontrol-cli-install. If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<installation version="1.0">
+<!-- Copyright 2011-2014 Erwin Müller <erwin.mueller@deventm.org> This file
+	is part of gscalculator-suite-install. All rights reserved. -->
+<izpack:installation version="5.0"
+	xmlns:izpack="http://izpack.org/schema/installation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
 
 	<info>
-		<appname>${project.custom.name}</appname>
-		<appversion>${project.custom.version}</appversion>
-		<appsubpath>${project.custom.name}-${project.custom.version}</appsubpath>
-		<url>${project.custom.organization.url}</url>
+		<appname>${project.custom.app.name}</appname>
+		<appversion>${project.custom.app.version}</appversion>
+		<appsubpath>${project.custom.app.path}</appsubpath>
+		<url>${project.custom.app.organization.url}</url>
 		<authors>
-			<author name="${project.custom.author.name}" email="${project.custom.author.email}" />
+			<author name="${project.custom.app.author.name}" email="${project.custom.app.author.email}" />
 		</authors>
 		<javaversion>${project.custom.source.source}</javaversion>
+		<run-privileged condition="izpack.windowsinstall.7|izpack.windowsinstall.vista" />
 	</info>
 
-	<guiprefs resizable="${project.custom.gui.resizeable}" width="${project.custom.gui.width}"
-		height="${project.custom.gui.height}" />
+	<guiprefs resizable="${project.custom.izpack.gui.resizeable}" width="${project.custom.izpack.gui.width}"
+		height="${project.custom.izpack.gui.height}">
+		<modifier key="useHeadingPanel" value="yes" />
+	</guiprefs>
 
 	<locale>
 		<langpack iso3="eng" />
 	</locale>
 
 	<resources>
-		<res id="InfoPanel.info" src="${project.custom.readme}" />
-		<res id="shortcutSpec.xml" src="win_shortcutSpec.xml" />
-		<res id="Unix_shortcutSpec.xml" src="unix_shortcutSpec.xml" />
+		<res id="InfoPanel.info" src="${project.custom.izpack.readme}" />
+		<res id="packsLang.xml" src="i18n/packsLang.xml" />
+		<res id="packsLang.xml_eng" src="i18n/packsLang.xml_eng" />
 	</resources>
 
 	<panels>
@@ -52,44 +59,40 @@
 		<panel classname="PacksPanel" />
 		<panel classname="SummaryPanel" />
 		<panel classname="InstallPanel" />
-		<panel classname="ShortcutPanel" />
 		<panel classname="SimpleFinishPanel" />
 	</panels>
 
 	<packs>
-		<pack name="Required" required="yes" installGroups="Required Files">
+		<pack name="Required" preselected="yes" required="yes"
+			installGroups="Required">
 			<description>Required files to run the application.</description>
-			<file src="lib/" targetdir="$INSTALL_PATH" />
-			<file src="etc/" targetdir="$INSTALL_PATH" />
+            <fileset dir="lib" targetdir="$INSTALL_PATH/lib" />
+			<fileset dir="etc" targetdir="$INSTALL_PATH/etc" />
+			<fileset dir="doc" targetdir="$INSTALL_PATH/doc" />
 		</pack>
-		<pack name="Linux run files" required="no" preselected="yes" os="unix"
-			installGroups="Linux noarch">
+		<pack name="Linux" preselected="yes" required="yes" os="unix"
+			installGroups="Linux">
 			<description>Linux run files.</description>
-            <file src="bin/linux/" targetdir="$INSTALL_PATH/bin/" />
+			<file src="bin/linux/debug-run.sh" targetdir="$INSTALL_PATH/bin/linux" />
+            <file src="bin/linux/run.sh" targetdir="$INSTALL_PATH/bin/linux" />
 			<executable targetfile="$INSTALL_PATH/bin/linux/run.sh"
 				stage="never" keep="true" />
 			<executable targetfile="$INSTALL_PATH/bin/linux/debug-run.sh"
 				stage="never" keep="true" />
 		</pack>
-		<pack name="Windows run files" required="no" preselected="yes"
-			os="windows" installGroups="Windows">
-			<description>Windows run files for x86 architecture.</description>
-			<file src="bin/windows/" targetdir="$INSTALL_PATH/bin/" />
-		</pack>
-		<pack name="Doc-English" required="no" preselected="yes"
-			installGroups="Documentation">
-			<description>English Documentation.</description>
-			<file src="doc/en/" targetdir="$INSTALL_PATH/doc/" />
-		</pack>
-		<pack name="Doc-Deutsch" required="no" preselected="yes"
-			installGroups="Documentation">
-			<description>Deutsche Dokumentation.</description>
-			<file src="doc/de/" targetdir="$INSTALL_PATH/doc/" />
+		<pack name="Windows" preselected="yes" required="yes" os="windows"
+			installGroups="Windows">
+			<description>Windows run files.</description>
+            <file src="bin/windows/debug-run.bat" targetdir="$INSTALL_PATH/bin/windows" />
+            <file src="bin/windows/run.bat" targetdir="$INSTALL_PATH/bin/windows" />
+            <file src="bin/windows/MessageBox.vbs" targetdir="$INSTALL_PATH/bin/windows" />
 		</pack>
 	</packs>
 
 	<!-- Required for creating shortcuts on Windows -->
-	<native type="izpack" name="ShellLink.dll" />
-	<native type="izpack" name="ShellLink_x64.dll" />
+	<natives>
+		<native type="izpack" name="ShellLink.dll" />
+		<native type="izpack" name="ShellLink_x64.dll" />
+	</natives>
 
-</installation>
+</izpack:installation>

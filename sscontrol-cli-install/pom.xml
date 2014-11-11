@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.anrisoftware.globalpom</groupId>
 		<artifactId>globalpom-izpack</artifactId>
-		<version>2.1</version>
+		<version>2.2-rc4-SNAPSHOT</version>
 		<relativePath />
 	</parent>
 
@@ -18,12 +18,13 @@
 	<description>Installs the command line interface application.</description>
 
 	<properties>
-		<project.custom.year>${project.inceptionYear}</project.custom.year>
-		<project.custom.mainclass>com.anrisoftware.sscontrol.start.Starter</project.custom.mainclass>
-		<project.custom.author.name>Erwin Müller</project.custom.author.name>
-		<project.custom.author.email>erwin.mueller@deventm.org</project.custom.author.email>
-		<project.custom.name>RoboBee</project.custom.name>
-		<project.custom.version>1.0</project.custom.version>
+		<project.custom.app.mainclass>com.anrisoftware.sscontrol.start.Starter</project.custom.app.mainclass>
+		<project.custom.app.author.name>Erwin Müller</project.custom.app.author.name>
+		<project.custom.app.author.email>erwin.mueller@deventm.org</project.custom.app.author.email>
+		<project.custom.app.name>RoboBee</project.custom.app.name>
+		<project.custom.app.version>1.0</project.custom.app.version>
+        <project.custom.app.organization.url>http://www.robobee-server.com</project.custom.app.organization.url>
+        <project.custom.app.path>robobee</project.custom.app.path>
 	</properties>
 
 	<dependencyManagement>
@@ -127,6 +128,16 @@
 	</dependencyManagement>
 
 	<dependencies>
+        <!-- log dependencies -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <!-- app dependencies -->
 		<dependency>
 			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-cli-app</artifactId>
