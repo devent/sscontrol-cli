@@ -21,14 +21,14 @@ package com.anrisoftware.sscontrol.resources
 def aptitude = "/usr/bin/aptitude"
 def restart = "/sbin/restart"
 
-profile "ubuntu_10_04", {
+profile "ubuntu_12_04", {
 	hostname {
-		install_command "$prefix$aptitude update && $prefix$aptitude install"
+		install_command "$prefix$aptitude"
 		restart_command "${prefix}/etc/init.d/hostname restart"
 		configuration_directory "$prefix/etc"
 	}
 	hosts {
-		install_command "$prefix$aptitude update && $prefix$aptitude install"
+		install_command "$prefix$aptitude"
 		configuration_directory "$prefix/etc"
 	}
 }

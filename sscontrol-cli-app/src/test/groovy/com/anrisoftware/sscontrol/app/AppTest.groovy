@@ -80,13 +80,13 @@ class AppTest {
 
     @Test
     void "hostname, hosts service"() {
-        copyURLToFile hostsHostnameUbuntuProfile, new File(tmpdir, "Ubuntu_10_04Profile.groovy")
+        copyURLToFile hostsHostnameUbuntuProfile, new File(tmpdir, "Ubuntu_12_04_Profile.groovy")
         copyURLToFile hostnameScript, new File(tmpdir, "Hostname.groovy")
         copyURLToFile hostsScript, new File(tmpdir, "Hosts.groovy")
         copyResourceToCommand installCommand, new File(tmpdir, "/usr/bin/aptitude")
         copyResourceToCommand hostnameRestartCommand, new File(tmpdir, "/etc/init.d/hostname")
 
-        String profile = "ubuntu_10_04"
+        String profile = "ubuntu_12_04"
         String[] args = [
             "-scripts",
             "file://${tmpdir.absolutePath}",
@@ -105,7 +105,7 @@ class AppTest {
     }
 
     @Test
-    void "firewall Ubuntu 12.04 service"() {
+    void "firewall from archive Ubuntu 12.04 service"() {
         copyURLToFile firewallUbuntu1204Tar, new File(tmpdir, "firewall_ubuntu_12_04.tar.gz")
         copyResourceToCommand installCommand, new File(tmpdir, "/usr/bin/aptitude")
         copyResourceToCommand hostnameRestartCommand, new File(tmpdir, "/etc/init.d/hostname")
@@ -132,7 +132,7 @@ class AppTest {
         copyResourceToCommand installCommand, new File(tmpdir, "/usr/bin/aptitude")
         copyResourceToCommand hostnameRestartCommand, new File(tmpdir, "/etc/init.d/hostname")
 
-        String profile = "ubuntu_10_04"
+        String profile = "ubuntu_12_04"
         String[] args = [
             "-scripts",
             "file://${profilesZipTmp.absolutePath}",
@@ -156,7 +156,7 @@ class AppTest {
         copyResourceToCommand installCommand, new File(tmpdir, "/usr/bin/aptitude")
         copyResourceToCommand hostnameRestartCommand, new File(tmpdir, "/etc/init.d/hostname")
 
-        String profile = "ubuntu_10_04"
+        String profile = "ubuntu_12_04"
         String[] args = [
             "-scripts",
             "file://${profilesZipTmp.absolutePath}",
@@ -182,7 +182,7 @@ class AppTest {
         copyResourceToCommand installCommand, new File(tmpdir, "/usr/bin/aptitude")
         copyResourceToCommand hostnameRestartCommand, new File(tmpdir, "/etc/init.d/hostname")
 
-        String profile = "ubuntu_10_04"
+        String profile = "ubuntu_12_04"
         String[] args = [
             "-scripts",
             "file://${profilesZipTmp.absolutePath}",
@@ -207,7 +207,7 @@ class AppTest {
         copyResourceToCommand installCommand, new File(tmpdir, "/usr/bin/aptitude")
         copyResourceToCommand hostnameRestartCommand, new File(tmpdir, "/etc/init.d/hostname")
 
-        String profile = "ubuntu_10_04"
+        String profile = "ubuntu_12_04"
         String[] args = [
             "-scripts",
             "file://${profilesZipTmp.absolutePath}",

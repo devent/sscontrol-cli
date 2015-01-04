@@ -1,2 +1,1 @@
-update
-install hostname
+-q -y install hostname
