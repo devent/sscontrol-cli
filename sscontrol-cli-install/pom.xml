@@ -149,6 +149,11 @@
 				<artifactId>sscontrol-security-fail2ban</artifactId>
 				<version>1.0-SNAPSHOT</version>
 			</dependency>
+            <dependency>
+                <groupId>com.anrisoftware.sscontrol</groupId>
+                <artifactId>sscontrol-security-spamassassin</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -247,6 +252,10 @@
 			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-security-fail2ban</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>com.anrisoftware.sscontrol</groupId>
+            <artifactId>sscontrol-security-spamassassin</artifactId>
+        </dependency>
 	</dependencies>
 
 </project>
