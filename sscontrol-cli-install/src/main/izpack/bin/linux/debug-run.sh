@@ -47,14 +47,16 @@ function checkJavaRuntime() {
     fi
 }
 
+currentDir=$(pwd)
 changeBinDirectory
 javaCommand=`type -P java`
 mainClass="${project.custom.app.mainclass}"
 lib="../../lib/*"
 IFS='.' read -a lang <<< "$LANG"
 log="-Dlogback.configurationFile=file:///$PWD/../../etc/logback-debug.xml"
+logArgs="-Dproject.custom.log.prefix=$currentDir"
 args=""
 noJavaRuntimeText="No Java Runtime found."
 checkJavaRuntime
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on"
-"$javaCommand" "$log" -cp "$lib" "$mainClass" $args $*
+"$javaCommand" "$logArgs" "$log" -cp "$lib" "$mainClass" $args $*

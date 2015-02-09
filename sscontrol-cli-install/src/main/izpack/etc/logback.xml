@@ -21,32 +21,36 @@
 -->
 <configuration scan="true">
 
-    <appender name="MAVEN_STYLE" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="ERR-CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <target>System.err</target>
         <encoder>
-            <pattern>[%level] %-4relative [%thread] %logger{0} - %msg%n%rEx</pattern>
+            <pattern>[%level] %-4relative %logger{0} - %msg%n%rEx{short}</pattern>
             <immediateFlush>false</immediateFlush>
         </encoder>
     </appender>
 
-	<appender name="FILE_DAILY"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${java.io.tmpdir}/${project.custom.app.path}.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${project.custom.app.path}.%d{yyyy-MM-dd}.log</fileNamePattern>
-			<maxHistory>30</maxHistory>
-		</rollingPolicy>
-		<encoder>
-			<pattern>[%level] %date{ISO8601} [%thread] %logger - %msg %n%rEx</pattern>
-			<immediateFlush>true</immediateFlush>
-		</encoder>
-	</appender>
+    <appender name="LOG-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${project.custom.log.prefix}/${project.custom.app.path}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${project.custom.log.prefix}/${project.custom.app.path}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>1MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%level] %date{ISO8601} [%thread] %logger - %msg %n%xEx</pattern>
+            <immediateFlush>false</immediateFlush>
+        </encoder>
+    </appender>
 
-	<root level="ERROR">
-		<appender-ref ref="MAVEN_STYLE" />
-        <appender-ref ref="FILE_DAILY" />
-	</root>
 
-	<logger name="com.anrisoftware" level="ERROR" />
+    <root level="ALL">
+        <appender-ref ref="LOG-FILE" />
+    </root>
+
+    <logger name="com.anrisoftware.sscontrol" level="INFO">
+        <appender-ref ref="ERR-CONSOLE" />
+    </logger>
 
 </configuration>
