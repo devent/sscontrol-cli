@@ -12,12 +12,16 @@
 
 	<groupId>com.anrisoftware.sscontrol</groupId>
 	<artifactId>sscontrol-cli-parent</artifactId>
-	<version>1.0-alpha-1</version>
+	<version>1.0-alpha-2</version>
 	<name>RoboBee :: Command Line Client :: Parent POM</name>
 	<packaging>pom</packaging>
 	<description>Manages dependencies and information for the command line interface application.</description>
 	<inceptionYear>2013</inceptionYear>
 	<url>https://anrisoftware.com/projects/projects/sscontrol-cli-parent</url>
+
+	<properties>
+		<project.custom.current.year>2015</project.custom.current.year>
+	</properties>
 
 	<developers>
 		<developer>
@@ -58,27 +62,27 @@
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-core</artifactId>
-				<version>1.0-alpha-1</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-profile</artifactId>
-				<version>1.0-alpha-1</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-hostname</artifactId>
-				<version>1.0-alpha-1</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-hosts</artifactId>
-				<version>1.0-alpha-1</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-firewall-ufw</artifactId>
-				<version>1.0-alpha-1</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 
 			<!-- other dependencies -->
@@ -105,7 +109,7 @@
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
 				<artifactId>globalpom-log</artifactId>
-				<version>1.18</version>
+				<version>1.19</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

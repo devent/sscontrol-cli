@@ -12,7 +12,7 @@
 
 	<groupId>com.anrisoftware.sscontrol</groupId>
 	<artifactId>sscontrol-cli-install</artifactId>
-	<version>1.0-alpha-2-SNAPSHOT</version>
+	<version>1.0-alpha-2</version>
 	<inceptionYear>2013</inceptionYear>
 	<name>RoboBee :: Command Line Client :: Installation</name>
 	<description>Installs the command line interface application.</description>
@@ -22,7 +22,7 @@
 		<project.custom.app.author.name>Erwin Müller</project.custom.app.author.name>
 		<project.custom.app.author.email>erwin.mueller@deventm.org</project.custom.app.author.email>
 		<project.custom.app.name>RoboBee</project.custom.app.name>
-		<project.custom.app.version>1.0-alpha-2-SNAPSHOT</project.custom.app.version>
+		<project.custom.app.version>1.0-alpha-2</project.custom.app.version>
 		<project.custom.app.organization.url>http://www.robobee-server.com</project.custom.app.organization.url>
 		<project.custom.app.path>robobee</project.custom.app.path>
 	</properties>
@@ -32,137 +32,137 @@
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-cli-app</artifactId>
-				<version>1.0-alpha-1</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
             <dependency>
                 <groupId>com.anrisoftware.sscontrol</groupId>
                 <artifactId>sscontrol-core</artifactId>
-                <version>1.0-alpha-2-SNAPSHOT</version>
+                <version>1.0-alpha-2</version>
             </dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-database-mysql</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-dhclient</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-dns-maradns</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-firewall-ufw</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-hostname</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-hosts</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-httpd-apache</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-httpd-citadel</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-httpd-gitit</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-httpd-nginx</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-httpd-phpmyadmin</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-httpd-piwik</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-httpd-redmine</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-httpd-roundcube</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-httpd-webservice</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-httpd-wordpress</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-ldap-openldap</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-mail-postfix</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-profile</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-remoteaccess</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-repo</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-security</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
             <dependency>
                 <groupId>com.anrisoftware.sscontrol</groupId>
                 <artifactId>sscontrol-security-clamav</artifactId>
-                <version>1.0-alpha-2-SNAPSHOT</version>
+                <version>1.0-alpha-2</version>
             </dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-security-fail2ban</artifactId>
-				<version>1.0-alpha-2-SNAPSHOT</version>
+				<version>1.0-alpha-2</version>
 			</dependency>
             <dependency>
                 <groupId>com.anrisoftware.sscontrol</groupId>
                 <artifactId>sscontrol-security-spamassassin</artifactId>
-                <version>1.0-alpha-2-SNAPSHOT</version>
+                <version>1.0-alpha-2</version>
             </dependency>
 		</dependencies>
 	</dependencyManagement>
