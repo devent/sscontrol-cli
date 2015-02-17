@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.anrisoftware.sscontrol</groupId>
 		<artifactId>sscontrol-cli-parent</artifactId>
-		<version>1.0-alpha-2</version>
+		<version>1.0-alpha-3-SNAPSHOT</version>
 		<relativePath>../sscontrol-cli-parent</relativePath>
 	</parent>
 
