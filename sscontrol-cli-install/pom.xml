@@ -121,6 +121,11 @@
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
+				<artifactId>sscontrol-httpd-yourls</artifactId>
+				<version>1.0-alpha-4-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-mail-postfix</artifactId>
 				<version>1.0-alpha-4-SNAPSHOT</version>
 			</dependency>
@@ -235,6 +240,10 @@
 		<dependency>
 			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-httpd-wordpress</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.anrisoftware.sscontrol</groupId>
+			<artifactId>sscontrol-httpd-yourls</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.anrisoftware.sscontrol</groupId>
