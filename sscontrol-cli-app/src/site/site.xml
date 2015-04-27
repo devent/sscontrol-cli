@@ -25,7 +25,7 @@ xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache
     <bannerLeft>
         <name>${project.name}</name>
         <href>${project.url}</href>
-        <src>images/em-logo-250x80.jpg</src>
+        <src>images/Death_Bee___Big_by_piewedge_background_250x80.png</src>
     </bannerLeft>
     <bannerRight>
         <name>Advanced Natural Research Institute Projects</name>
@@ -44,6 +44,7 @@ xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache
 		<menu name="Overview">
 			<item name="Home" href="/index.html" />
 			<item name="Download" href="https://anrisoftware.com/l/2o" />
+            <item name="Javadoc" href="https://anrisoftware.com/javadoc/com.anrisoftware.sscontrol/sscontrol-cli-app/apidocs/index.html" />
 			<item name="Source code" href="https://anrisoftware.com/l/2s" />
             <item name="Source code (Github)" href="https://github.com/devent/sscontrol-cli" />
             <item name="Roadmap" href="https://anrisoftware.com/l/2t" />

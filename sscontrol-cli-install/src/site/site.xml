@@ -25,7 +25,7 @@ xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache
     <bannerLeft>
         <name>${project.name}</name>
         <href>${project.url}</href>
-        <src>images/em-logo-250x80.jpg</src>
+        <src>images/Death_Bee___Big_by_piewedge_background_250x80.png</src>
     </bannerLeft>
     <bannerRight>
         <name>Advanced Natural Research Institute Projects</name>
