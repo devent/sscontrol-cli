@@ -1,5 +1,5 @@
 @REM
-@REM Copyright 2013-2014 Erwin Müller <erwin.mueller@deventm.org>
+@REM Copyright 2013-2015 Erwin Müller <erwin.mueller@deventm.org>
 @REM
 @REM This file is part of sscontrol-cli-install.
 @REM

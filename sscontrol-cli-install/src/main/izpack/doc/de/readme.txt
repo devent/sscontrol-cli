@@ -27,4 +27,4 @@ Start Windows
 
 Example
 
-    # bin/linux/test-run.sh -scripts wordpress_proxy_ubuntu_12_04/ -profile ubuntu_12_04 -server localhost -services security
+    # bin/linux/run.sh -scripts wordpress_proxy_ubuntu_12_04/ -profile ubuntu_12_04 -server localhost -services security

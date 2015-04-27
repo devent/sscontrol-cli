@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright 2013-2014 Erwin Müller <erwin.mueller@deventm.org>
+    Copyright 2013-2015 Erwin Müller <erwin.mueller@deventm.org>
 
     This file is part of sscontrol-cli-install.
 
@@ -19,8 +19,6 @@
     along with sscontrol-cli-install. If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<!-- Copyright 2011-2014 Erwin Müller <erwin.mueller@deventm.org> This file
-	is part of gscalculator-suite-install. All rights reserved. -->
 <izpack:installation version="5.0"
 	xmlns:izpack="http://izpack.org/schema/installation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
@@ -33,7 +31,7 @@
 		<authors>
 			<author name="${project.custom.app.author.name}" email="${project.custom.app.author.email}" />
 		</authors>
-		<javaversion>${project.custom.source.source}</javaversion>
+		<javaversion>${project.custom.jre.minversion}</javaversion>
 		<run-privileged condition="izpack.windowsinstall.7|izpack.windowsinstall.vista" />
 	</info>
 
@@ -73,18 +71,18 @@
 		<pack name="Linux" preselected="yes" required="yes" os="unix"
 			installGroups="Linux">
 			<description>Linux run files.</description>
-			<file src="bin/linux/debug-run.sh" targetdir="$INSTALL_PATH/bin/linux" />
-            <file src="bin/linux/run.sh" targetdir="$INSTALL_PATH/bin/linux" />
-			<executable targetfile="$INSTALL_PATH/bin/linux/run.sh"
+			<file src="bin/linux/${project.custom.app.linuxdebugbin}" targetdir="$INSTALL_PATH/bin/linux" />
+            <file src="bin/linux/${project.custom.app.linuxbin}" targetdir="$INSTALL_PATH/bin/linux" />
+			<executable targetfile="$INSTALL_PATH/bin/linux/${project.custom.app.linuxbin}"
 				stage="never" keep="true" />
-			<executable targetfile="$INSTALL_PATH/bin/linux/debug-run.sh"
+			<executable targetfile="$INSTALL_PATH/bin/linux/${project.custom.app.linuxdebugbin}"
 				stage="never" keep="true" />
 		</pack>
 		<pack name="Windows" preselected="yes" required="yes" os="windows"
 			installGroups="Windows">
 			<description>Windows run files.</description>
-            <file src="bin/windows/debug-run.bat" targetdir="$INSTALL_PATH/bin/windows" />
-            <file src="bin/windows/run.bat" targetdir="$INSTALL_PATH/bin/windows" />
+            <file src="bin/windows/${project.custom.app.windowsdebugbin}" targetdir="$INSTALL_PATH/bin/windows" />
+            <file src="bin/windows/${project.custom.app.windowsbin}" targetdir="$INSTALL_PATH/bin/windows" />
             <file src="bin/windows/MessageBox.vbs" targetdir="$INSTALL_PATH/bin/windows" />
 		</pack>
 	</packs>

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright 2013-2014 Erwin Müller <erwin.mueller@deventm.org>
+# Copyright 2013-2015 Erwin Müller <erwin.mueller@deventm.org>
 #
 # This file is part of sscontrol-cli-install.
 #
@@ -42,7 +42,12 @@ function noJavaRuntime() {
 function checkJavaRuntime() {
     if [ -z "$javaCommand" ]; then
         noJavaRuntime
-        zenity --error --text="$noJavaRuntimeText"
+        type zenity >/dev/null 2>&1
+        if [ $? = 0 ]; then
+            zenity --error --text="$noJavaRuntimeText"
+        else
+            echo "$noJavaRuntimeText"
+        fi
         exit 1
     fi
 }
