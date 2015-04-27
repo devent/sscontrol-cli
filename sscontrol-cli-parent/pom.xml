@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.anrisoftware.globalpom</groupId>
 		<artifactId>globalpom-groovy</artifactId>
-		<version>1.24</version>
+		<version>1.25</version>
 		<relativePath />
 	</parent>
 
@@ -19,21 +19,18 @@
 	<inceptionYear>2013</inceptionYear>
 	<url>https://anrisoftware.com/projects/projects/sscontrol-cli-parent</url>
 
-	<properties>
-		<project.custom.current.year>2015</project.custom.current.year>
-	</properties>
-
 	<developers>
 		<developer>
 			<id>EM</id>
 			<name>Erwin Müller</name>
-			<organization>Advanced Natural Research Insitute GmbH</organization>
 			<email>erwin.mueller@deventm.org</email>
+			<timezone>Europe/Berlin</timezone>
+			<organization>Advanced Natural Research Institute</organization>
+			<organizationUrl>https://anrisoftware.com</organizationUrl>
 			<roles>
 				<role>Owner</role>
 				<role>Developer</role>
 			</roles>
-			<timezone>Europe/Berlin</timezone>
 		</developer>
 	</developers>
 
@@ -51,10 +48,25 @@
 	</issueManagement>
 
 	<scm>
-		<connection>scm:git:${custom.gitpublic.url}sscontrol-clinew.git</connection>
-		<developerConnection>scm:git:${custom.gitpublic.url}sscontrol-clinew.git</developerConnection>
-		<url>scm:git:${custom.gitpublic.url}sscontrol-clinew.git</url>
+		<connection>scm:git:git@anrisoftware.com:sscontrol-cli.git</connection>
+		<developerConnection>scm:git:git@anrisoftware.com:sscontrol-cli.git</developerConnection>
+		<url>https://anrisoftware.com/projects/projects/sscontrol-cli2/repository</url>
 	</scm>
+
+	<distributionManagement>
+		<site>
+			<id>anrisoftware</id>
+			<url>dav:https://anrisoftware.com/javadoc/${project.groupId}/${project.artifactId}</url>
+		</site>
+		<repository>
+			<id>osssonatype</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+		<snapshotRepository>
+			<id>osssonatype_snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<dependencyManagement>
 		<dependencies>
@@ -62,54 +74,59 @@
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-core</artifactId>
-				<version>1.0-alpha-4-SNAPSHOT</version>
+				<version>1.0-alpha-4</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-profile</artifactId>
-				<version>1.0-alpha-4-SNAPSHOT</version>
+				<version>1.0-alpha-4</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-hostname</artifactId>
-				<version>1.0-alpha-4-SNAPSHOT</version>
+				<version>1.0-alpha-4</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-hosts</artifactId>
-				<version>1.0-alpha-4-SNAPSHOT</version>
+				<version>1.0-alpha-4</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-firewall-ufw</artifactId>
-				<version>1.0-alpha-4-SNAPSHOT</version>
+				<version>1.0-alpha-4</version>
 			</dependency>
 
 			<!-- other dependencies -->
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
 				<artifactId>globalpomutils-core</artifactId>
-				<version>2.3</version>
+				<version>2.5</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
 				<artifactId>globalpom-groovytestutils</artifactId>
-				<version>1.24</version>
+				<version>1.25</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.propertiesutils</groupId>
 				<artifactId>propertiesutils-contextproperties</artifactId>
-				<version>1.12</version>
+				<version>1.13</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.resources</groupId>
 				<artifactId>resources-texts</artifactId>
-				<version>1.14</version>
+				<version>1.15</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
 				<artifactId>globalpom-log</artifactId>
-				<version>1.19</version>
+				<version>1.20</version>
+			</dependency>
+			<dependency>
+				<groupId>args4j</groupId>
+				<artifactId>args4j</artifactId>
+				<version>2.32</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

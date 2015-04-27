@@ -14,6 +14,22 @@
 	<name>RoboBee :: Command Line Client :: Application</name>
 	<description>The command line client application.</description>
 	<inceptionYear>2013</inceptionYear>
+    <url>https://anrisoftware.com/projects/projects/sscontrol-cli-app</url>
+
+    <distributionManagement>
+        <site>
+            <id>anrisoftware</id>
+            <url>dav:https://anrisoftware.com/javadoc/${project.groupId}/${project.artifactId}</url>
+        </site>
+        <repository>
+            <id>osssonatype</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+        <snapshotRepository>
+            <id>osssonatype_snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 	<dependencies>
 
