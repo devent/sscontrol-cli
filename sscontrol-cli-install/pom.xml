@@ -139,6 +139,11 @@
                 <artifactId>sscontrol-httpd-frontaccounting</artifactId>
                 <version>1.0-alpha-5-SNAPSHOT</version>
             </dependency>
+            <dependency>
+                <groupId>com.anrisoftware.sscontrol</groupId>
+                <artifactId>sscontrol-httpd-fudforum</artifactId>
+                <version>1.0-alpha-5-SNAPSHOT</version>
+            </dependency>
 			<dependency>
 				<groupId>com.anrisoftware.sscontrol</groupId>
 				<artifactId>sscontrol-httpd-nginx</artifactId>
@@ -268,6 +273,10 @@
 			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-httpd-frontaccounting</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>com.anrisoftware.sscontrol</groupId>
+            <artifactId>sscontrol-httpd-fudforum</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>com.anrisoftware.sscontrol</groupId>
 			<artifactId>sscontrol-httpd-nginx</artifactId>
