@@ -42,7 +42,7 @@ Maven
 <parent>
     <groupId>com.anrisoftware.sscontrol</groupId>
     <artifactId>sscontrol-cli-parent</artifactId>
-    <version>1.0-alpha-4</version>
+    <version>1.0-alpha-5</version>
     <relativePath>../sscontrol-cli-parent</relativePath>
 </parent>
 ---

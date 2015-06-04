@@ -41,6 +41,6 @@ Maven
 <dependency>
     <groupId>com.anrisoftware.sscontrol</groupId>
     <artifactId>sscontrol-cli-app</artifactId>
-    <version>1.0-alpha-4</version>
+    <version>1.0-alpha-5</version>
 </dependency>
 ---
